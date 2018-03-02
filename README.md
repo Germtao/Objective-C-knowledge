@@ -7,4 +7,4 @@
 
 - [iOS语言本地化和国际化](https://github.com/Germtao/Objective-C-knowledge/tree/master/iOS%E8%AF%AD%E8%A8%80%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%92%8C%E5%9B%BD%E9%99%85%E5%8C%96)
 
-![iOS技术栈](/Users/tao/Desktop/iOS技术栈.png)
+![iOS技术栈.png](http://upload-images.jianshu.io/upload_images/2228008-48112e2c2f2810c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
