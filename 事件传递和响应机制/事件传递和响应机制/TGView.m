@@ -14,6 +14,11 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     NSLog(@"===== 开始触摸 %@", touches);
+    // 1. 先做自己的事
+    self.backgroundColor = [UIColor cyanColor];
+    
+    // 2. 再调用系统的默认做法，再把事件交给上一个响应者处理
+    [super touchesBegan:touches withEvent:event];
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

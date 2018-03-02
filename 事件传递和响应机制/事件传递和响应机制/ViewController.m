@@ -26,9 +26,10 @@
 
 #pragma mark - UIResponder 内部触摸方法
 
-//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-//    NSLog(@"======开始触摸");
-//}
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    NSLog(@"======开始触摸");
+    self.view.backgroundColor = [UIColor purpleColor];
+}
 //
 //- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
 //    NSLog(@"------触摸移动");
