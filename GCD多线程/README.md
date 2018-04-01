@@ -100,7 +100,7 @@
 
 关于同步异步、并行串行和线程的关系，可以由下表概括：
 
-/Users/tao/Desktop/1.png
+![线程关系](https://github.com/Germtao/Objective-C-knowledge/blob/master/GCD%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E5%85%B3%E7%B3%BB.png)
 
 可以看到，同步方法不一定在本线程，异步方法方法也不一定新开线程（考虑主队列）。
 
@@ -123,14 +123,20 @@
 举个🌰解释一下：
 
 ```
-dispatch_queue_t mainQueue = dispatch_get_main_queue();
+- (void)deadlock {
 
-id block = ^{
-NSLog(@"%@", [NSThread currentThread]);
-};
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
 
-// 向当前串行队列中同步派发一个任务, 死锁
-dispatch_sync(mainQueue, block);
+    id block = ^{
+        NSLog(@"%@", [NSThread currentThread]);
+    };
+
+    // 向当前串行队列中同步派发一个任务, 死锁
+    dispatch_sync(mainQueue, block);
+    
+    // 解决方案
+    // dispatch_async(mainQueue, block);
+}
 ```
 
 这段代码就会导致死锁，因为我们目前在主队列中，又将要同步地添加一个 `block` 到主队列(串行)中。
@@ -152,7 +158,7 @@ dispatch_sync(mainQueue, block);
 
 ### 3. GCD 常用函数
 
-#### dispatch_group
+### dispatch_group
 
 了解完队列之后，很自然的会有一个想法：我们怎么知道所有任务都已经执行完了呢？
 
@@ -160,29 +166,64 @@ dispatch_sync(mainQueue, block);
 
 但是对于并行队列，以及多个串行、并行队列混合的情况，就需要使用 `dispatch_group` 了。
 
+两种方式：
+
+- 1. dispatch_group_async
+- 2. dispatch_group_enter & dispatch_group_leave
+
+
 ```
-// 创建线程组
-dispatch_group_t group = dispatch_group_create();
-dispatch_queue_t serialQueue = dispatch_queue_create("serialQueue", DISPATCH_QUEUE_SERIAL);
+- (void)group01 {
 
-// 组异步执行
-dispatch_group_async(group, serialQueue, ^{
-for (int i = 0; i < 2; i++) {
-NSLog(@"group-serial - %@", [NSThread currentThread]);
+    // 创建线程组
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_queue_t serialQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+
+    // 组异步执行
+    dispatch_group_async(group, serialQueue, ^{
+        for (int i = 0; i < 2; i++) {
+            NSLog(@"group-serial - %@", [NSThread currentThread]);
+        }
+    });
+
+    dispatch_group_async(group, serialQueue, ^{
+        for (int i = 0; i < 3; i++) {
+            NSLog(@"group-02-serial - %@", [NSThread currentThread]);
+        }
+    });
+
+    // 把第三个参数block传入第二个参数队列中去。
+    // 而且可以保证第三个参数block执行时，group中的所有任务已经全部完成
+    dispatch_group_notify(group, serialQueue, ^{
+        NSLog(@"Finished - %@", [NSThread currentThread]);
+    });
 }
-});
+```
 
-dispatch_group_async(group, serialQueue, ^{
-for (int i = 0; i < 3; i++) {
-NSLog(@"group-02-serial - %@", [NSThread currentThread]);
+```
+- (void)group02 {
+
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+
+    dispatch_group_enter(group);
+    dispatch_async(queue, ^{
+        NSLog(@"group-serial - %@", [NSThread currentThread]);
+
+        dispatch_group_leave(group);
+    });
+
+    dispatch_group_enter(group);
+    dispatch_async(queue, ^{
+        NSLog(@"group-serial02 - %@", [NSThread currentThread]);
+
+        dispatch_group_leave(group);
+    });
+
+    dispatch_group_notify(group, queue, ^{
+        NSLog(@"Finished02 - %@", [NSThread currentThread]);
+    });
 }
-});
-
-// 把第三个参数block传入第二个参数队列中去。
-// 而且可以保证第三个参数block执行时，group中的所有任务已经全部完成
-dispatch_group_notify(group, serialQueue, ^{
-NSLog(@"Finished - %@", [NSThread currentThread]);
-});
 ```
 
 ###### dispatch_group_wait
@@ -194,33 +235,39 @@ NSLog(@"Finished - %@", [NSThread currentThread]);
 第二个 `dispatch_time_t` 类型的参数还有两个特殊值：`DISPATCH_TIME_NOW` 和 `DISPATCH_TIME_FOREVER`。
 
 
-#### barrier
+### barrier
 
 - 通过 `dispatch_barrier_async` 添加的block会等到之前添加所有的block执行完毕再执行
 - 在 `dispatch_barrier_async` 之后添加的block会等到 `dispatch_barrier_async` 添加的block执行完毕再执行
 
 ```
 - (void)barrier {
-dispatch_queue_t queue = dispatch_queue_create("net.bujige.testQueue", DISPATCH_QUEUE_CONCURRENT);
-dispatch_async(queue, ^{
-// dosth1;
-});
-dispatch_async(queue, ^{
-// dosth2;
-});
-dispatch_barrier_async(queue, ^{
-// doBarrier;
-});
-dispatch_async(queue, ^{
-// dosth4;
-});
-dispatch_async(queue, ^{
-// dosth5;
-});
+
+    dispatch_queue_t queue = dispatch_queue_create("testQueue", DISPATCH_QUEUE_CONCURRENT);
+    
+    dispatch_async(queue, ^{
+        NSLog(@"第一个 block 完成");
+    });
+    
+    dispatch_async(queue, ^{
+        NSLog(@"第二个 block 完成");
+    });
+    
+    dispatch_barrier_async(queue, ^{
+        NSLog(@"barrier block 完成");
+    });
+    
+    dispatch_async(queue, ^{
+        NSLog(@"第三个 block 完成");
+    });
+    
+    dispatch_async(queue, ^{
+        NSLog(@"第四个 block 完成");
+    });
 }
 ```
 
-#### 信号量 (dispatch_semaphore)
+### 信号量 (dispatch_semaphore)
 
 当我们多个线程要访问同一个资源的时候，往往会设置一个信号量，当信号量大于0的时候，新的线程可以去操作这个资源，操作时信号量-1，操作完后信号量+1，当信号量等于0的时候，必须等待，所以通过控制信号量，我们可以控制能够同时进行的并发数。
 
