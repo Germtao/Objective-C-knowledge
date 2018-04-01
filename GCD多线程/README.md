@@ -150,7 +150,7 @@ dispatch_sync(mainQueue, block);
 只有当我们需要保证队列中的任务必须顺序执行时，才考虑使用 `dispatch_sync`。在使用 `dispatch_sync` 的时候应该分析当前处于哪个队列，以及任务会提交到哪个队列。
 ```
 
-### 3. GCD 任务组
+### 3. GCD 常用函数
 
 #### dispatch_group
 
@@ -194,9 +194,104 @@ NSLog(@"Finished - %@", [NSThread currentThread]);
 第二个 `dispatch_time_t` 类型的参数还有两个特殊值：`DISPATCH_TIME_NOW` 和 `DISPATCH_TIME_FOREVER`。
 
 
+#### barrier
 
+- 通过 `dispatch_barrier_async` 添加的block会等到之前添加所有的block执行完毕再执行
+- 在 `dispatch_barrier_async` 之后添加的block会等到 `dispatch_barrier_async` 添加的block执行完毕再执行
 
+```
+- (void)barrier {
+dispatch_queue_t queue = dispatch_queue_create("net.bujige.testQueue", DISPATCH_QUEUE_CONCURRENT);
+dispatch_async(queue, ^{
+// dosth1;
+});
+dispatch_async(queue, ^{
+// dosth2;
+});
+dispatch_barrier_async(queue, ^{
+// doBarrier;
+});
+dispatch_async(queue, ^{
+// dosth4;
+});
+dispatch_async(queue, ^{
+// dosth5;
+});
+}
+```
 
+#### 信号量 (dispatch_semaphore)
 
+当我们多个线程要访问同一个资源的时候，往往会设置一个信号量，当信号量大于0的时候，新的线程可以去操作这个资源，操作时信号量-1，操作完后信号量+1，当信号量等于0的时候，必须等待，所以通过控制信号量，我们可以控制能够同时进行的并发数。
 
+信号量有以下三个函数：
+
+- dispatch_semaphore_create：创建一个信号量
+- dispatch_semaphore_signal：信号量+1
+- dispatch_semaphore_wait：等待，直到信号量大于0时，即可操作，同时将信号量-1
+
+```
+- (void)dispatchSignal {
+
+    // value: 最多几个资源可以访问
+    long value = 2;
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(value);
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+
+    // 任务1
+    dispatch_async(queue, ^{
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+
+        NSLog(@"run task 1");
+        sleep(1);
+        NSLog(@"complete task 1");
+
+        dispatch_semaphore_signal(semaphore);
+    });
+
+    // 任务2
+    dispatch_async(queue, ^{
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+
+        NSLog(@"run task 2");
+        sleep(1);
+        NSLog(@"complete task 2");
+
+        dispatch_semaphore_signal(semaphore);
+    });
+
+    // 任务3
+    dispatch_async(queue, ^{
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+
+        NSLog(@"run task 3");
+        sleep(1);
+        NSLog(@"complete task 3");
+
+        dispatch_semaphore_signal(semaphore);
+    });
+}
+```
+运行结果
+```
+run task 1
+run task 2
+complete task 1
+complete task 2
+run task 3
+complete task 3
+```
+
+由于设定的信号值为2，先执行两个线程，等执行完一个，才会继续执行下一个，保证同一时间执行的线程数不超过2。
+
+如果我们把信号量设置成1，`dispatch_semaphore_create(1)` 那么执行结果就会变成顺序执行
+
+```
+run task 1
+complete task 1
+run task 2
+complete task 2
+run task 3
+complete task 3
+```
 
