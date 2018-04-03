@@ -8,7 +8,11 @@
 
 #import "NSThreadController.h"
 
+NSString *const kImgUrl = @"https://upload-images.jianshu.io/upload_images/1252638-663a7cfca2c1eca8.jpeg";
+
 @interface NSThreadController ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
 
@@ -24,11 +28,6 @@
     [self staticInstance];
     
     [self implicitInstance];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - NSThread 创建线程的三种方法
@@ -63,6 +62,39 @@
 
 - (void)backgroundThread:(NSString *)str {
     NSLog(@"隐式实例方法 %@", str);
+}
+
+#pragma mark - 图片异步加载
+
+- (IBAction)dynamicInstanceThread:(UIButton *)sender {
+    
+    NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(loadImage:) object:kImgUrl];
+    [thread start];
+}
+
+- (IBAction)staticInstanceThread:(UIButton *)sender {
+    [NSThread detachNewThreadSelector:@selector(loadImage:) toTarget:self withObject:kImgUrl];
+}
+
+- (IBAction)implicitInstanceThread:(UIButton *)sender {
+    [self performSelectorInBackground:@selector(loadImage:) withObject:kImgUrl];
+}
+
+#pragma mark - 加载
+
+- (void)loadImage:(NSString *)url {
+    NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+    UIImage *image = [UIImage imageWithData:imgData];
+    
+    if (imgData != nil) {
+        [self performSelectorOnMainThread:@selector(refreshUI:) withObject:image waitUntilDone:YES];
+    } else {
+        NSLog(@"没有图片");
+    }
+}
+
+- (void)refreshUI:(UIImage *)image {
+    self.imageView.image = image;
 }
 
 @end

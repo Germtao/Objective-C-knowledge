@@ -8,7 +8,11 @@
 
 #import "NSOperationController.h"
 
+NSString *const ImgUrl = @"https://upload-images.jianshu.io/upload_images/27219-114abab0a4bc26df.jpeg";
+
 @interface NSOperationController ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
 
@@ -55,6 +59,39 @@
 
 - (void)invocation:(NSString *)str {
     NSLog(@"%@", str);
+}
+
+#pragma mark - 图片异步加载
+
+- (IBAction)invocationOperation:(UIButton *)sender {
+    NSInvocationOperation *invocation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(loadImage:) object:ImgUrl];
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [queue addOperation:invocation];
+}
+
+- (IBAction)blockOperation:(UIButton *)sender {
+    NSBlockOperation *block = [NSBlockOperation blockOperationWithBlock:^{
+        [self loadImage:ImgUrl];
+    }];
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [queue addOperation:block];
+}
+
+- (void)loadImage:(NSString *)url {
+    NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+    UIImage *image = [UIImage imageWithData:imgData];
+    
+    if (imgData != nil) {
+        [self performSelectorOnMainThread:@selector(refreshUI:) withObject:image waitUntilDone:YES];
+    } else {
+        NSLog(@"没有图片");
+    }
+}
+
+- (void)refreshUI:(UIImage *)image {
+    self.imageView.image = image;
 }
 
 @end
