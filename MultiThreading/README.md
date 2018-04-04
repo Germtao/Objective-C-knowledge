@@ -254,14 +254,14 @@ NSLog(@"隐式实例方法 %@", str);
 }
 ```
 
-3. 执行结果：
+执行结果：
 
 ```
 invocationOperation
 blockOperation
 ```
 
-
+3. 自定义NSOperation子类实现main方法
 
 
 
