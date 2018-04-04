@@ -13,6 +13,10 @@
 		71494DE520711E86006C7A38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71494DE420711E86006C7A38 /* Assets.xcassets */; };
 		71494DE820711E86006C7A38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71494DE620711E86006C7A38 /* LaunchScreen.storyboard */; };
 		71494DEB20711E86006C7A38 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 71494DEA20711E86006C7A38 /* main.m */; };
+		71494DF320733CD5006C7A38 /* NSThreadController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71494DF220733CD5006C7A38 /* NSThreadController.m */; };
+		71494DF620733CEF006C7A38 /* NSOperationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71494DF520733CEF006C7A38 /* NSOperationController.m */; };
+		71494DF920733D02006C7A38 /* GCDController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71494DF820733D02006C7A38 /* GCDController.m */; };
+		71494DFC2073ADB5006C7A38 /* TGOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 71494DFB2073ADB5006C7A38 /* TGOperation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,14 @@
 		71494DE720711E86006C7A38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		71494DE920711E86006C7A38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		71494DEA20711E86006C7A38 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		71494DF120733CD5006C7A38 /* NSThreadController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSThreadController.h; sourceTree = "<group>"; };
+		71494DF220733CD5006C7A38 /* NSThreadController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSThreadController.m; sourceTree = "<group>"; };
+		71494DF420733CEF006C7A38 /* NSOperationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSOperationController.h; sourceTree = "<group>"; };
+		71494DF520733CEF006C7A38 /* NSOperationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSOperationController.m; sourceTree = "<group>"; };
+		71494DF720733D02006C7A38 /* GCDController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCDController.h; sourceTree = "<group>"; };
+		71494DF820733D02006C7A38 /* GCDController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCDController.m; sourceTree = "<group>"; };
+		71494DFA2073ADB5006C7A38 /* TGOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TGOperation.h; sourceTree = "<group>"; };
+		71494DFB2073ADB5006C7A38 /* TGOperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TGOperation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +75,14 @@
 				71494DDE20711E86006C7A38 /* ViewController.h */,
 				71494DDF20711E86006C7A38 /* ViewController.m */,
 				71494DE120711E86006C7A38 /* Main.storyboard */,
+				71494DF120733CD5006C7A38 /* NSThreadController.h */,
+				71494DF220733CD5006C7A38 /* NSThreadController.m */,
+				71494DF420733CEF006C7A38 /* NSOperationController.h */,
+				71494DF520733CEF006C7A38 /* NSOperationController.m */,
+				71494DFA2073ADB5006C7A38 /* TGOperation.h */,
+				71494DFB2073ADB5006C7A38 /* TGOperation.m */,
+				71494DF720733D02006C7A38 /* GCDController.h */,
+				71494DF820733D02006C7A38 /* GCDController.m */,
 				71494DE420711E86006C7A38 /* Assets.xcassets */,
 				71494DE620711E86006C7A38 /* LaunchScreen.storyboard */,
 				71494DE920711E86006C7A38 /* Info.plist */,
@@ -142,8 +162,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71494DF620733CEF006C7A38 /* NSOperationController.m in Sources */,
+				71494DF320733CD5006C7A38 /* NSThreadController.m in Sources */,
 				71494DE020711E86006C7A38 /* ViewController.m in Sources */,
+				71494DFC2073ADB5006C7A38 /* TGOperation.m in Sources */,
 				71494DEB20711E86006C7A38 /* main.m in Sources */,
+				71494DF920733D02006C7A38 /* GCDController.m in Sources */,
 				71494DDD20711E86006C7A38 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
