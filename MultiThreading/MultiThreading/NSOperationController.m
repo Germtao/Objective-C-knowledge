@@ -7,12 +7,15 @@
 //
 
 #import "NSOperationController.h"
+#import "TGOperation.h"
 
 NSString *const ImgUrl = @"https://upload-images.jianshu.io/upload_images/27219-114abab0a4bc26df.jpeg";
 
-@interface NSOperationController ()
+@interface NSOperationController () <TGOperationDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
+@property (weak, nonatomic) IBOutlet UILabel *loadingLabel;
 
 @end
 
@@ -63,20 +66,38 @@ NSString *const ImgUrl = @"https://upload-images.jianshu.io/upload_images/27219-
 
 #pragma mark - 图片异步加载
 
+// NSInvocationOperation
 - (IBAction)invocationOperation:(UIButton *)sender {
+    
     NSInvocationOperation *invocation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(loadImage:) object:ImgUrl];
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [queue addOperation:invocation];
 }
 
+// NSBlockOperation
 - (IBAction)blockOperation:(UIButton *)sender {
+    
     NSBlockOperation *block = [NSBlockOperation blockOperationWithBlock:^{
         [self loadImage:ImgUrl];
     }];
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [queue addOperation:block];
+}
+
+// 自定义NSOperation子类
+- (IBAction)customSubOperation:(UIButton *)sender {
+    
+    TGOperation *operation = [TGOperation new];
+    operation.delegate = self;
+    operation.imgUrl = ImgUrl;
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [queue addOperation:operation];
+    
+    self.imageView.image = [UIImage imageNamed:@""];
+    self.loadingLabel.hidden = NO;
 }
 
 - (void)loadImage:(NSString *)url {
@@ -90,7 +111,15 @@ NSString *const ImgUrl = @"https://upload-images.jianshu.io/upload_images/27219-
     }
 }
 
+// MARK: - TGOperationDelegate
+
+- (void)loadImageDidFinished:(UIImage *)image {
+    self.loadingLabel.hidden = YES;
+    self.imageView.image = image;
+}
+
 - (void)refreshUI:(UIImage *)image {
+    self.loadingLabel.hidden = YES;
     self.imageView.image = image;
 }
 
