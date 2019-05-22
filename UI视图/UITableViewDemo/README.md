@@ -5,3 +5,7 @@
 1. 并发访问、数据拷贝
 
 ![并发访问 & 数据拷贝](https://github.com/Germtao/Objective-C-knowledge/blob/master/UI%E8%A7%86%E5%9B%BE/%E5%B9%B6%E5%8F%91%E8%AE%BF%E9%97%AE%E3%80%81%E6%95%B0%E6%8D%AE%E6%8B%B7%E8%B4%9D.png)
+
+2. 串行队列
+
+![串行队列](https://github.com/Germtao/Objective-C-knowledge/blob/master/UI%E8%A7%86%E5%9B%BE/%E4%B8%B2%E8%A1%8C%E9%98%9F%E5%88%97.png)
