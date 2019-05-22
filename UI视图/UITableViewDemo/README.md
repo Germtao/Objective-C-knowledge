@@ -9,3 +9,23 @@
 2. 串行队列
 
 ![串行队列](https://github.com/Germtao/Objective-C-knowledge/blob/master/UI%E8%A7%86%E5%9B%BE/%E4%B8%B2%E8%A1%8C%E9%98%9F%E5%88%97.png)
+
+# UIView 和 CALayer
+
+![UIView和CALayer](https://github.com/Germtao/Objective-C-knowledge/blob/master/UI%E8%A7%86%E5%9B%BE/UIView%E5%92%8CCALayer.png)
+
+### 两者职责的分工
+
+* `UIView`为其提供内容，以及负责处理触摸等事件，参与响应链。
+* `CALayer`负责显示内容contents
+
+# 事件传递与视图响应链
+
+![事件传递与视图响应链](https://github.com/Germtao/Objective-C-knowledge/blob/master/UI%E8%A7%86%E5%9B%BE/%E4%BA%8B%E4%BB%B6%E4%BC%A0%E9%80%92%E4%B8%8E%E8%A7%86%E5%9B%BE%E5%93%8D%E5%BA%94%E9%93%BE.png)
+
+### 事件传递
+* `- (nullable UIView *)hitTest:(CGPoint)point withEvent:(nullable UIEvent *)event;`
+* `- (BOOL)pointInside:(CGPoint)point withEvent:(nullable UIEvent *)event;`
+
+1. 流程图
+![事件传递流程图](https://github.com/Germtao/Objective-C-knowledge/blob/master/UI%E8%A7%86%E5%9B%BE/%E4%BA%8B%E4%BB%B6%E4%BC%A0%E9%80%92%E6%B5%81%E7%A8%8B.png)
