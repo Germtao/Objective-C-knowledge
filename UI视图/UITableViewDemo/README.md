@@ -29,3 +29,8 @@
 
 1. 流程图
 ![事件传递流程图](https://github.com/Germtao/Objective-C-knowledge/blob/master/UI%E8%A7%86%E5%9B%BE/%E4%BA%8B%E4%BB%B6%E4%BC%A0%E9%80%92%E6%B5%81%E7%A8%8B.png)
+
+2. `hitTest:withEvent:`的系统实现
+
+![hitTest:withEvent](https://github.com/Germtao/Objective-C-knowledge/blob/master/UI%E8%A7%86%E5%9B%BE/hitTestwithEvent%E7%9A%84%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0.png)
+
