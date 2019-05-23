@@ -111,3 +111,17 @@
 
 # 图像显示原理
 
+![图像显示原理](https://github.com/Germtao/Objective-C-knowledge/blob/master/UI%E8%A7%86%E5%9B%BE/%E5%9B%BE%E5%83%8F%E6%98%BE%E7%A4%BA%E5%8E%9F%E7%90%86.png)
+
+### CPU工作
+
+![UI显示CPU工作](https://github.com/Germtao/Objective-C-knowledge/blob/master/UI%E8%A7%86%E5%9B%BE/UI%E6%98%BE%E7%A4%BACPU%E5%B7%A5%E4%BD%9C.png)
+
+### GPU渲染管线
+
+![GPU渲染管线](https://github.com/Germtao/Objective-C-knowledge/blob/master/UI%E8%A7%86%E5%9B%BE/GPU%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF.png)
+
+
+1. 五步做完之后，把最终的像素点提交到对应的`FrameBuffer(真缓冲区)`中
+2. 然后由`视频控制器`在`vsync`信号到来之前，去`FrameBuffer`当中提取最终要显示到屏幕上的内容
+
