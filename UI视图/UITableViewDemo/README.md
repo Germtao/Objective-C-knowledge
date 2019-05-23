@@ -154,6 +154,8 @@
    * `[layer.delegate displayLayer:];`
       - 代理负责生成对应的`bitmap`
       - 设置该`bitmap`作为`layer.contents`属性的值
+      
+![异步绘制流程](https://github.com/Germtao/Objective-C-knowledge/blob/master/UI%E8%A7%86%E5%9B%BE/%E5%BC%82%E6%AD%A5%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B.png)
 
 
 
