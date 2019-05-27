@@ -7,8 +7,30 @@
 //
 
 #import "RuntimeObject.h"
+#import <objc/runtime.h>
 
 @implementation RuntimeObject
+
++ (void)load {
+    // 获取test方法
+    Method test = class_getInstanceMethod(self, @selector(test));
+    
+    // 获取otherTest方法
+    Method otherTest = class_getInstanceMethod(self, @selector(otherTest));
+    
+    // 交换两个方法的实现
+    method_exchangeImplementations(test, otherTest);
+}
+
+- (void)test {
+    NSLog(@"%@ - test", NSStringFromClass([self class]));
+}
+
+- (void)otherTest {
+    // 实际上调用的test方法
+    [self otherTest];
+    NSLog(@"%@ - otherTest", NSStringFromClass([self class]));
+}
 
 + (BOOL)resolveInstanceMethod:(SEL)sel {
     // 如果调用的是test方法，打印日志
