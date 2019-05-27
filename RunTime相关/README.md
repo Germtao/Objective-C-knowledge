@@ -31,12 +31,16 @@ struct objc_super {
 
 ![消息传递流程](https://github.com/Germtao/Objective-C-knowledge/blob/master/RunTime%E7%9B%B8%E5%85%B3/%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92%E6%B5%81%E7%A8%8B.png)
 
-1. 当前类中查找
+1. 缓存查找 - 即哈希查找
+
+![缓存查找](https://github.com/Germtao/Objective-C-knowledge/blob/master/RunTime%E7%9B%B8%E5%85%B3/%E7%BC%93%E5%AD%98%E6%9F%A5%E6%89%BE.png)
+
+2. 当前类中查找
 
 - 对于`已排序好`的列表，采用`二分查找`算法查找方法对应执行函数
 - 对于`没有排序`的列表，采用`一般遍历`查找方法对应执行函数
 
-2. 父类逐级查找
+3. 父类逐级查找
 
 ![父类逐级查找](https://github.com/Germtao/Objective-C-knowledge/blob/master/RunTime%E7%9B%B8%E5%85%B3/%E7%88%B6%E7%B1%BB%E9%80%90%E7%BA%A7%E6%9F%A5%E6%89%BE.png)
 
@@ -77,10 +81,6 @@ NS_ASSUME_NONNULL_END
 */
 
 ```
-
-#### 5. 缓存查找
-
-![缓存查找](https://github.com/Germtao/Objective-C-knowledge/blob/master/RunTime%E7%9B%B8%E5%85%B3/%E7%BC%93%E5%AD%98%E6%9F%A5%E6%89%BE.png)
 
 
 
