@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "RuntimeObject.h"
+#import "RuntimeObject1.h"
 
 @interface AppDelegate ()
 
@@ -21,6 +22,10 @@
     RuntimeObject *obj = [[RuntimeObject alloc] init];
     // 调用test方法, 只有声明, 没有实现
     [obj test];
+    
+    // 动态添加方法
+    RuntimeObject1 *obj1 = [[RuntimeObject1 alloc] init];
+    [obj1 test];
     
     return YES;
 }

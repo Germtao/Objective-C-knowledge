@@ -15,6 +15,7 @@
 		3B175329229BDF8B000ED114 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B175328229BDF8B000ED114 /* main.m */; };
 		3B175333229BDF8B000ED114 /* RuntimeDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B175332229BDF8B000ED114 /* RuntimeDemoUITests.m */; };
 		3B17533F229BDFB5000ED114 /* RuntimeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B17533E229BDFB5000ED114 /* RuntimeObject.m */; };
+		3B175342229BEA3A000ED114 /* RuntimeObject1.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B175340229BEA3A000ED114 /* RuntimeObject1.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,8 @@
 		3B175334229BDF8B000ED114 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B17533D229BDFB5000ED114 /* RuntimeObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RuntimeObject.h; sourceTree = "<group>"; };
 		3B17533E229BDFB5000ED114 /* RuntimeObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RuntimeObject.m; sourceTree = "<group>"; };
+		3B175340229BEA3A000ED114 /* RuntimeObject1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuntimeObject1.m; sourceTree = "<group>"; };
+		3B175341229BEA3A000ED114 /* RuntimeObject1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuntimeObject1.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +98,8 @@
 				3B175328229BDF8B000ED114 /* main.m */,
 				3B17533D229BDFB5000ED114 /* RuntimeObject.h */,
 				3B17533E229BDFB5000ED114 /* RuntimeObject.m */,
+				3B175341229BEA3A000ED114 /* RuntimeObject1.h */,
+				3B175340229BEA3A000ED114 /* RuntimeObject1.m */,
 			);
 			path = RuntimeDemo;
 			sourceTree = "<group>";
@@ -210,6 +215,7 @@
 			files = (
 				3B17531E229BDF8A000ED114 /* ViewController.m in Sources */,
 				3B17533F229BDFB5000ED114 /* RuntimeObject.m in Sources */,
+				3B175342229BEA3A000ED114 /* RuntimeObject1.m in Sources */,
 				3B175329229BDF8B000ED114 /* main.m in Sources */,
 				3B17531B229BDF8A000ED114 /* AppDelegate.m in Sources */,
 			);
