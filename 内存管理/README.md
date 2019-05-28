@@ -61,6 +61,57 @@
 
 ---
 
+## MRC - 手动引用计数
+
+- alloc：实现**经过一系列调用，最终调用了C函数`calloc`。此时并没有设置`retainCount`为`1`。**
+- `retain`：经过两次Hash查找，再+1
+```
+   // 实现：
+   SideTable& table = SideTables()[this];
+   size_t& refcntStorage = table.refcnts[this];
+   // 引用计数+1操作
+   refcntStorage += SIDE_TABLE_RC_ONE;
+```
+- `release`：
+```
+   // 实现：
+   SideTable& table = SideTables()[this];
+   RefcountMap::iterator it = table.refcnts.find(this);
+   it->second -= SIDE_TABLE_RC_ONE;
+```
+- `retainCount`
+```
+   // 实现：
+   SideTable& table = SideTables()[this];
+   size_t& refcnt_result = 1;
+   RefcountMap::iterator it = table.refcnts.find(this);
+   refcnt_result += it->second >> SIDE_TABLE_RC_SHIFT;
+```
+- `autorelease`
+- dealloc
+
+**dealloc实现流程：**
+
+![dealloc实现](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/dealloc.png)
+
+   - `object_dispose()`内部实现
+   
+   ![object_dispose()内部实现](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/object_dispose()%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0.png)
+   
+   - `objc_destructInstance()`内部实现
+   
+   ![objc_destructInstance()内部实现](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/objc_destructInstance()%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0.png)
+   
+   - `clearDeallocating()`内部实现
+   
+   ![clearDeallocating()内部实现](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/clearDeallocating()%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0.png)
+
+## ARC - 自动引用计数
+
+- 是`LLVM（编译器）`和`RunTime`协作的结果
+- 禁止手动调用`retain/release/retainCount/dealloc`
+- 新增`weak`、`strong`属性关键字
+
 
 
 
