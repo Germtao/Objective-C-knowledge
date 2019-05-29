@@ -120,9 +120,53 @@
 
 > 如何添加weak对象到弱引用表？ 回答：可以通过弱引用对象进行Hash算法的计算来查找获取它的位置
 
+---
+
+## AutoreleasePool - 自动释放池
+
+**问题：**
+> - 实现原理是怎样的？
+  答：在当次`runloop`将要结束时，调用`AutoreleasePoolPage::pop()`释放对象。
+> - 为何可以嵌套使用？
+  答：多层嵌套就是多次插入哨兵对象。
+> - 什么场景需要手动插入？
+  答：在`for`循环中，`alloc`图片数据等内存消耗较大的场景，需要手动插入`autoreleasePool`。
 
 
+- `@autoreleasepool{}`
 
+![autoreleasePool](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E8%87%AA%E5%8A%A8%E9%87%8A%E6%94%BE%E6%B1%A0/autoreleasePool.png)
+
+- `objc_autoreleasePush`
+
+![objc_autoreleasePush](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E8%87%AA%E5%8A%A8%E9%87%8A%E6%94%BE%E6%B1%A0/autoreleasePoolPush.png)
+
+- `objc_autoreleasePop`
+
+![objc_autoreleasePop](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E8%87%AA%E5%8A%A8%E9%87%8A%E6%94%BE%E6%B1%A0/autoreleasePoolPop.png)
+
+### 1. 数据结构
+
+- 以`栈`为结点通过`双向链表`的形式组合而成 
+- 和线程一一对应的
+
+**双向链表**
+
+![双向链表](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E8%87%AA%E5%8A%A8%E9%87%8A%E6%94%BE%E6%B1%A0/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8.png)
+
+**AutoreleasePoolPage**
+
+![AutoreleasePoolPage](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E8%87%AA%E5%8A%A8%E9%87%8A%E6%94%BE%E6%B1%A0/autoreleasePoolPage.png)
+
+**[obj autorelease]内部实现**
+
+![[obj autorelease]内部实现流程](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E8%87%AA%E5%8A%A8%E9%87%8A%E6%94%BE%E6%B1%A0/%5Bobj%20autorelease%5D%20%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0.png)
+
+**`AutoreleasePoolPage::pop`**
+
+- 根据传入的哨兵对象找到对应位置
+- 给上次`push`操作之后添加的对象依次发送`release`消息
+- 回退`next`指针到正确的位置
 
 
 
