@@ -112,7 +112,13 @@
 - 禁止手动调用`retain/release/retainCount/dealloc`
 - 新增`weak`、`strong`属性关键字
 
+#### 弱引用管理
 
+![弱引用管理](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%BC%B1%E5%BC%95%E7%94%A8%E7%AE%A1%E7%90%86.png)
+
+![弱引用管理实现](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%BC%B1%E5%BC%95%E7%94%A8%E7%AE%A1%E7%90%86%E5%AE%9E%E7%8E%B0.png)
+
+> 如何添加weak对象到弱引用表？ 回答：可以通过弱引用对象进行Hash算法的计算来查找获取它的位置
 
 
 
