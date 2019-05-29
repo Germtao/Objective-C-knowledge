@@ -168,6 +168,61 @@
 - 给上次`push`操作之后添加的对象依次发送`release`消息
 - 回退`next`指针到正确的位置
 
+---
+
+## 循环引用
+
+### 类别
+
+- 自循环引用
+
+![自循环引用](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8/%E8%87%AA%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8.png)
+
+- 相互循环引用
+
+![相互循环引用](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8/%E7%9B%B8%E4%BA%92%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8.png)
+
+- 多循环引用
+
+![多循环引用](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8/%E5%A4%9A%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8.png)
+
+### 考点
+
+- 代理
+- `Block`
+- `NSTimer`
+- 大环引用
+
+### 如何破除循环引用？
+
+- 避免产生循环引用
+- 在合适的时机手动断环
+
+### 具体的解决方案有哪些？
+
+- `__weak`
+
+![__weak方案](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8/__weak%E6%96%B9%E6%A1%88.png)
+
+- `__block`
+
+  - `MRC`中，`__block`修饰对象不会增加其`retainCount（引用计数）`，避免了循环引用。
+  - `ARC`中，`__block`修饰对象会被强引用，无法避免循环引用，需手动断环。
+
+- `__unsafe_unretained` - 不推荐使用
+
+  - 修饰对象不会增加其引用计数，避免了循环引用。
+  - 如果被修饰对象在某一时机被释放，会产生`悬垂指针`！
+
+### 循环引用示例
+
+- `NSTimer`的循环引用示例
+
+![NSTimer循环引用解决方案](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8/NSTimer%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.png)
+
+[NSTimer循环引用解决方案](https://github.com/Germtao/Objective-C-knowledge/tree/master/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8/NSTimerDemo)
+
+
 
 
 
