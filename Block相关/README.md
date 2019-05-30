@@ -110,6 +110,10 @@ struct __block_impl {
 - 全局变量 & 静态全局变量
   - 不截获
 
+### 源码解析
+
+- 使用`【clang -rewrite-objc -fobjc-arc file.m】`命令获取编译后代码。
+
 
 
 
