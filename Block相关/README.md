@@ -168,5 +168,59 @@ struct _Block_byref_multiplier_0 {
 
 --- 
 
+## Block的内存管理
+
+- `Block`的类型
+- `Block`的`Copy`操作
+- 栈上`Block`的销毁与Copy
+
+### Block类别
+
+- `__NSConcreteGlobalBlock` - 全局
+- `__NSConcreteStackBlock`  - 栈
+- `__NSConcreteMallocBlock` - 堆
+
+![Block内存分配](https://github.com/Germtao/Objective-C-knowledge/blob/master/Block%E7%9B%B8%E5%85%B3/Block%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D.png)
+
+### Block的Copy操作
+
+Block类别|源|Copy结果
+:---:|:---:|:---:
+__NSConcreteStackBlock|栈|堆
+__NSConcreteGlobalBlock|数据区|什么也不做
+__NSConcreteMallocBlock|堆|增加引用计数
+
+### 栈上Block的销毁与Copy
+
+- 栈上`Block`的销毁
+
+![栈上Block的销毁](https://github.com/Germtao/Objective-C-knowledge/blob/master/Block%E7%9B%B8%E5%85%B3/%E6%A0%88%E4%B8%8ABlock%E7%9A%84%E9%94%80%E6%AF%81.png)
+
+- 栈上`Block`的`Copy`操作
+
+![栈上Block的Copy](https://github.com/Germtao/Objective-C-knowledge/blob/master/Block%E7%9B%B8%E5%85%B3/%E6%A0%88%E4%B8%8ABlock%E7%9A%84Copy.png)
+
+- 栈上`__block`变量的`Copy`
+
+![栈上__block变量的Copy](https://github.com/Germtao/Objective-C-knowledge/blob/master/Block%E7%9B%B8%E5%85%B3/%E6%A0%88%E4%B8%8A__block%E5%8F%98%E9%87%8F%E7%9A%84Copy.png)
+
+### 总结
+
+- `__forwarding`存在的意义？
+
+    无论在任何内存位置，都可以顺利的访问`同一个__block变量`。
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
