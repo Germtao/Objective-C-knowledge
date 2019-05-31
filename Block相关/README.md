@@ -99,6 +99,8 @@ struct __block_impl {
 
 /**
 结果：result is 12
+
+如果实静态局部变量(static int multiplier = 6), rusult is 8
 */
 ```
 
@@ -114,8 +116,57 @@ struct __block_impl {
 
 - 使用`【clang -rewrite-objc -fobjc-arc file.m】`命令获取编译后代码。
 
+### __block修饰符
 
+- 一般情况下，对被截获变量进行`赋值`操作需要添加`__block修饰符`。
 
+![__block修饰符](https://github.com/Germtao/Objective-C-knowledge/blob/master/Block%E7%9B%B8%E5%85%B3/__block%E4%BF%AE%E9%A5%B0%E7%AC%A61.png)
+
+> 对变量进行赋值时，是否需要`__block修饰符`？
+
+- 需要：
+   - 局部变量
+     - 基本数据类型
+     - 对象类型
+     
+- 不需要：
+   - 静态局部变量
+   - 全局变量
+   - 静态全局变量
+   
+> `__block修饰符`一般面试题？
+
+```
+{
+    __block int multiplier = 6;
+    int(^Block)(int) = ^int(int num) {
+        return num * multiplier;
+    };
+    multiplier = 4;
+    NSLog(@"result is %d", Block(2));
+}
+
+/**
+结果：result is 8
+*/
+```
+   
+- `__block`修饰的变量变成了`对象`
+
+`__block int multiplier = 6;`编译成下方结构体
+
+```
+struct _Block_byref_multiplier_0 {
+    void *_isa;
+    __Block_byref_multiplier_0 *__forwarding;
+    int __flags;
+    int __size;
+    int multiplier;
+}
+```
+![__block修饰符](https://github.com/Germtao/Objective-C-knowledge/blob/master/Block%E7%9B%B8%E5%85%B3/__block%E4%BF%AE%E9%A5%B0%E7%AC%A62.png)
+
+--- 
 
 
 
