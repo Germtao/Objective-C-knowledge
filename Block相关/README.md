@@ -8,6 +8,8 @@
 
 ## Block介绍
 
+### 定义
+
 - `Block`是将`函数`及其执行`上下文`封装起来的`对象`
 
 ![Block的本质](https://github.com/Germtao/Objective-C-knowledge/blob/master/Block%E7%9B%B8%E5%85%B3/Block%E7%9A%84%E6%9C%AC%E8%B4%A8.png)
@@ -210,11 +212,49 @@ __NSConcreteMallocBlock|堆|增加引用计数
 
     无论在任何内存位置，都可以顺利的访问`同一个__block变量`。
 
+---
 
+## Block的循环引用
 
+> 问题: 下方代码会产生内存泄漏吗？
 
+```
+{
+    __block MyBlock *blockSelf = self;
+    _blk = ^int(int num) {
+        int result = num * blockSelf.var;
+        return result;
+    };
+    
+    _blk(3);
+}
 
+```
 
+- 在`MRC`下，不会产生内存泄漏。
+- 在`ARC`下，会发生循环引用，导致内存泄漏。
+
+### ARC下产生内存泄漏的原因和解决方案
+
+![原因和解决方案](https://github.com/Germtao/Objective-C-knowledge/blob/master/Block%E7%9B%B8%E5%85%B3/ARC%E4%B8%8B__block%E7%9A%84%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.png)
+
+```
+{
+    __block MyBlock *blockSelf = self;
+    _blk = ^int(int num) {
+        int result = num * blockSelf.var;
+        blockSelf = nil; // 解决方案
+        return result;
+    };
+    
+    _blk(3);
+}
+```
+
+- 调用`block`之后，断开大环引用，从而都得到内存销毁。
+- 缺点：如果`block`永远不调用，循环引用环就会一直存在。
+
+---
 
 
 
