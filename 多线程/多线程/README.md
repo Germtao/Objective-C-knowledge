@@ -1,6 +1,6 @@
 # 多线程
 
-- `GCD`
+- [GCD](https://github.com/Germtao/Objective-C-knowledge/tree/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B#gcd)
 - `NSOperation`
 - `NSThread`
 - `多线程与锁`
