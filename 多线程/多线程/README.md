@@ -9,7 +9,7 @@
 
 - [同步/异步和串行/并发](https://github.com/Germtao/Objective-C-knowledge/tree/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B#1-%E5%90%8C%E6%AD%A5%E5%BC%82%E6%AD%A5-%E5%92%8C-%E4%B8%B2%E8%A1%8C%E5%B9%B6%E5%8F%91)
 - [dispatch_barrier_async - 解决**多读单写**的问题](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B/README.md#2-dispatch_barrier_async)
-- `dispatch_group`
+- [dispatch_group](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B/README.md#2-dispatch_group)
 
 ### 1. 同步/异步 和 串行/并发
 
@@ -133,9 +133,52 @@
 }
 ```
 
+### 3. dispatch_group
 
+> 问题：所有图片下载完成后, 合成一张完整的图片？
 
+```Objective-C
+@interface GroupObject ()
 
+/// 定义一个并发队列
+@property (nonatomic, strong) dispatch_queue_t concurrent_queue;
+
+@property (nonatomic, strong) NSMutableArray <NSURL *> *arrayURLs;
+
+@end
+
+@implementation GroupObject
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.concurrent_queue = dispatch_queue_create("concurrent_queue", DISPATCH_QUEUE_CONCURRENT);
+        self.arrayURLs = [NSMutableArray array];
+    }
+    return self;
+}
+
+- (void)handle {
+    // 创建一个group
+    dispatch_group_t group = dispatch_group_create();
+    
+    // 遍历各个元素执行操作
+    for (NSURL *url in self.arrayURLs) {
+        // 异步组分派到并发队列中
+        dispatch_group_async(group, self.concurrent_queue, ^{
+            // 根据url去下载图片
+            NSLog(@"url is %@", url);
+        });
+    }
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        // 当组中所有任务执行完毕后, 会调用该block
+        NSLog(@"所有图片下载完毕...");
+    });
+}
+
+@end
+```
 
 
 
