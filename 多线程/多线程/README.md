@@ -1,7 +1,7 @@
 # 多线程
 
 - [GCD](https://github.com/Germtao/Objective-C-knowledge/tree/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B#gcd)
-- `NSOperation`
+- [NSOperation](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B/README.md#nsoperation)
 - `NSThread`
 - `多线程与锁`
 
@@ -179,6 +179,30 @@
 
 @end
 ```
+---
+
+## NSOperation
+
+需要和`NSOperationQueue`配合使用来实现多线程方案
+
+- 可以添加任务依赖
+
+- 可以控制任务执行状态
+
+  - isReady - 任务是否处于就绪状态
+  - isExecuting - 任务是否处于正在执行中状态
+  - isFinished - 任务是否处于已执行完成状态
+  - isCancelled - 任务是否处于已取消状态
+  
+> 如果只重写`main`方法, 底层控制变更任务完成状态, 以及任务退出。如果重写了`start`方法, 自行控制任务状态。
+  
+- 可以控制最大并发量
+
+
+
+
+
+
 
 
 
