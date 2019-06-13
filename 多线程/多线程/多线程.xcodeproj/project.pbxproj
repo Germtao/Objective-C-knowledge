@@ -17,6 +17,7 @@
 		3B1BB5CE22B0D3A70081FB2E /* UIButton+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BB5CD22B0D3A70081FB2E /* UIButton+Extension.m */; };
 		3B1BB5D222B0D9560081FB2E /* GCDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BB5D122B0D9560081FB2E /* GCDViewController.m */; };
 		3B1BB5D522B0D9650081FB2E /* OperationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BB5D422B0D9650081FB2E /* OperationViewController.m */; };
+		3B1BB5D922B22B4D0081FB2E /* UserCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BB5D822B22B4C0081FB2E /* UserCenter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,8 @@
 		3B1BB5D122B0D9560081FB2E /* GCDViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCDViewController.m; sourceTree = "<group>"; };
 		3B1BB5D322B0D9650081FB2E /* OperationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OperationViewController.h; sourceTree = "<group>"; };
 		3B1BB5D422B0D9650081FB2E /* OperationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OperationViewController.m; sourceTree = "<group>"; };
+		3B1BB5D722B22B4C0081FB2E /* UserCenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserCenter.h; sourceTree = "<group>"; };
+		3B1BB5D822B22B4C0081FB2E /* UserCenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserCenter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +73,7 @@
 		3B1BB5B022B0CDF90081FB2E /* 多线程 */ = {
 			isa = PBXGroup;
 			children = (
+				3B1BB5D622B22B350081FB2E /* 多读单写 */,
 				3B1BB5B122B0CDF90081FB2E /* AppDelegate.h */,
 				3B1BB5B222B0CDF90081FB2E /* AppDelegate.m */,
 				3B1BB5C722B0D2480081FB2E /* Controller */,
@@ -113,6 +117,23 @@
 				3B1BB5D422B0D9650081FB2E /* OperationViewController.m */,
 			);
 			path = SubController;
+			sourceTree = "<group>";
+		};
+		3B1BB5D622B22B350081FB2E /* 多读单写 */ = {
+			isa = PBXGroup;
+			children = (
+				3B1BB5DA22B22B520081FB2E /* Model */,
+			);
+			path = "多读单写";
+			sourceTree = "<group>";
+		};
+		3B1BB5DA22B22B520081FB2E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3B1BB5D722B22B4C0081FB2E /* UserCenter.h */,
+				3B1BB5D822B22B4C0081FB2E /* UserCenter.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,6 +213,7 @@
 				3B1BB5C122B0CDFA0081FB2E /* main.m in Sources */,
 				3B1BB5B322B0CDF90081FB2E /* AppDelegate.m in Sources */,
 				3B1BB5CA22B0D25D0081FB2E /* MenuViewController.m in Sources */,
+				3B1BB5D922B22B4D0081FB2E /* UserCenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

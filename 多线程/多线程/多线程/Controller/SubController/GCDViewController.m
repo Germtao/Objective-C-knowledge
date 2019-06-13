@@ -20,6 +20,7 @@
     
     [self setup];
     [self setupUI];
+    [self moreReadAndSingleWrite];
 }
 
 // MARK: - 同步分派一个任务到串行队列
@@ -91,6 +92,11 @@
     NSLog(@"do some thing...");
 }
 
+#pragma mark - 多读单写/dispatch_barrier_async
+- (void)dispatch_barrier_async {
+    
+}
+
 - (void)setup {
     
     self.title = @"GCD";
@@ -127,6 +133,15 @@
     [self.view addSubview:item1];
     [self.view addSubview:item2];
     [self.view addSubview:item3];
+}
+
+- (void)moreReadAndSingleWrite {
+    UIButton *item = [UIButton buttonWithTitle:@"多读单写" tag:0
+                               backgroundColor:[UIColor cyanColor]
+                                        target:self
+                                        action:@selector(dispatch_barrier_async)];
+    item.frame = CGRectMake((self.view.bounds.size.width - 100) * 0.5, 400, 100, 40);
+    [self.view addSubview:item];
 }
 
 @end
