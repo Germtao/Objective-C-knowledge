@@ -8,7 +8,7 @@
 ## GCD
 
 - [同步/异步和串行/并发](https://github.com/Germtao/Objective-C-knowledge/tree/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B#1-%E5%90%8C%E6%AD%A5%E5%BC%82%E6%AD%A5-%E5%92%8C-%E4%B8%B2%E8%A1%8C%E5%B9%B6%E5%8F%91)
-- `dispatch_barrier_async` - 解决**多读单写**的问题
+- [dispatch_barrier_async - 解决**多读单写**的问题](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B/README.md#2-dispatch_barrier_async)
 - `dispatch_group`
 
 ### 1. 同步/异步 和 串行/并发
