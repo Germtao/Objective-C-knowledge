@@ -2,7 +2,7 @@
 
 - [GCD](https://github.com/Germtao/Objective-C-knowledge/tree/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B#gcd)
 - [NSOperation](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B/README.md#nsoperation)
-- `NSThread`
+- [NSThread](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B/README.md#nsthread)
 - `多线程与锁`
 
 ## GCD
@@ -197,6 +197,12 @@
 > 如果只重写`main`方法, 底层控制变更任务完成状态, 以及任务退出。如果重写了`start`方法, 自行控制任务状态。
   
 - 可以控制最大并发量
+
+---
+
+## NSThread
+
+![启动流程](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B/NSThread%20Pics/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B.png)
 
 
 
