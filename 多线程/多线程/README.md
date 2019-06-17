@@ -7,6 +7,8 @@
 
 ## GCD
 
+   用来实现一些`简单的线程同步`, 包括一些`子线程的分派`, 实现一些类似于`多读单写`问题的解决方案.
+
 - [同步/异步和串行/并发](https://github.com/Germtao/Objective-C-knowledge/tree/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B#1-%E5%90%8C%E6%AD%A5%E5%BC%82%E6%AD%A5-%E5%92%8C-%E4%B8%B2%E8%A1%8C%E5%B9%B6%E5%8F%91)
 - [dispatch_barrier_async - 解决**多读单写**的问题](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B/README.md#2-dispatch_barrier_async)
 - [dispatch_group](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%A4%9A%E7%BA%BF%E7%A8%8B/README.md#2-dispatch_group)
@@ -183,7 +185,7 @@
 
 ## NSOperation
 
-需要和`NSOperationQueue`配合使用来实现多线程方案
+  需要和`NSOperationQueue`配合使用来实现多线程方案. 比如第三方框架 `AFNetworking、SDWebImage`等均有使用NSOperation.
 
 - 可以添加任务依赖
 
@@ -191,7 +193,7 @@
 
   - isReady - 任务是否处于就绪状态
   - isExecuting - 任务是否处于正在执行中状态
-  - isFinished - 任务是否处于已执行完成状态
+  - isFinished - 任务是否处于已执行完成状态, 通过`KVO`的方式通知对应的`NSOpreationQueue`来移除`NSOperation`.
   - isCancelled - 任务是否处于已取消状态
   
 > 如果只重写`main`方法, 底层控制变更任务完成状态, 以及任务退出。如果重写了`start`方法, 自行控制任务状态。
@@ -202,8 +204,111 @@
 
 ## NSThread
 
+  实现一个常驻线程.
+
 ![启动流程](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B/NSThread%20Pics/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B.png)
 
+--- 
+
+## 多线程与锁
+
+> iOS中都有哪些锁？
+
+- `@synchronized`
+- `atomic`
+- `OSSpinLock`
+- `NSRecursiveLock`
+- `NSLock`
+- `dispatch_semaphore_t`
+
+#### @synchronized
+
+一般在创建单例对象的时候使用.
+    
+#### atomic
+
+- 修饰属性的关键字
+- 对被修饰属性进行原子操作（不负责使用）
+
+```Objective-C
+    @property (atomic) NSMutableArray *array;
+
+    self.array = [NSMutableArray array]; // ✔️: 保证线程安全
+
+    [self.array addObject:obj]; // ✘: 不保证线程安全
+```
+    
+#### OSSpinLock
+
+**自旋锁**:
+
+- `循环等待`询问, 不释放当前资源
+-  用于轻量级数据访问, 简单的`int`值的`+1/-1`操作
+
+#### NSLock
+
+以下代码产生**死锁**:
+    
+```Objective-C
+    - (void)method_A {
+        [lock lock];
+        [self method_B];
+        [lock unlock];
+    }
+
+    - (void)method_B {
+        [lock lock];
+        // 逻辑操作
+        [lock unlock];
+    }
+```
+
+#### NSRecursiveLock
+
+**递归锁**: 解决NSLock死锁问题, 主要就是解决锁重录的问题.
+    
+```Objective-C
+    - (void)method_A {
+        [recursiveLock lock];
+        [self method_B];
+        [recursiveLock unlock];
+    }
+
+    - (void)method_B {
+        [recursiveLock lock];
+        // 逻辑操作
+        [recursiveLock unlock];
+    }
+```
+
+#### dispatch_semaphore_t
+
+常用的几个方法: 
+
+- `dispatch_semaphore_create();`
+
+```Objective-C
+    struct semaphore {
+        int value;
+        List <thread>;
+    }
+```
+
+- `dispatch_semaphore_wait();`
+
+```Objective-C
+    S.value = S.value - 1;
+    if S.value < 0 then Block(S.list); // 阻塞是一个主动行为
+```
+
+- `dispatch_semaphore_signal(semaphore);`
+
+```Objective-C
+    S.value = S.value + 1;
+    if S.value <= 0 then weakup(S.list); // 唤醒是一个被动行为
+```
+
+--- 
 
 
 
