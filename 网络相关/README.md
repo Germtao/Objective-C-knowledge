@@ -32,13 +32,34 @@
 
 #### 3. HTTP的特点
 
-  无连接
+  **无连接**
   
     HTTP的持久连接
     
-  ![持久连接](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/Resource/%E6%8C%81%E4%B9%85%E8%BF%9E%E6%8E%A5.png)
+    头部字段  
     
-  无状态
+      `Connection`: keep-alive
+      
+      `time`: 20
+      
+      `max`: 10
+    
+  ![持久连接](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/Resource/%E6%8C%81%E4%B9%85%E8%BF%9E%E6%8E%A5.png)
+  
+  > 怎样判断一个请求是否结束？
+  
+    1. `Content-length`: 1024
+  
+    1. `chunked`: 最后会有一个空的chunked
+  
+  > Charles抓包原理是怎样的？
+  
+    中间人（代理服务器）攻击
+  
+  ![Charles抓包原理](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/Resource/Charles%E6%8A%93%E5%8C%85%E5%8E%9F%E7%90%86.png)
+  
+    
+  **无状态**
   
     Cookie / Session
 
