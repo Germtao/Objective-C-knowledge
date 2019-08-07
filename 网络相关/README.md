@@ -1,7 +1,8 @@
 # 网络
 
-- `HTTP`协议
-- `HTTPS`与网络安全
+[HTTP协议](https://github.com/Germtao/Objective-C-knowledge/tree/master/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3#http)
+
+[HTTPS与网络安全]()
 - `TCP` / `UDP`
 - `DNS`解析
 - `Session` / `Cookie`
@@ -50,7 +51,7 @@
   
     1. `Content-length`: 1024
   
-    1. `chunked`: 最后会有一个空的chunked
+    2. `chunked`: 最后会有一个空的chunked
   
   > Charles抓包原理是怎样的？
   
@@ -76,6 +77,7 @@
     - GET参数长度限制2048个字符, POST一般没有限制
     - GET请求不安全, POST请求比较安全
 
+
   标准回答：
   
     1. 从语义角度:
@@ -89,9 +91,32 @@
     POST: 处理资源
       非安全的、非幂等的、非可缓存的
       
-      
+---
 
+## HTTPS与网络安全
 
+  HTTPS和HTTP有怎样的区别？
+  
+    HTTPS = HTTP + SSL/TLS
 
+![HTTPS与网络安全](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/Resource/HTTPS%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8.png)
 
+### 会话秘钥
 
+> 会话秘钥 = random S + random C + 预主秘钥
+
+#### 非对称加密
+
+![非对称加密](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/Resource/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86.png)
+
+#### 对称加密
+
+![对称加密](https://github.com/Germtao/Objective-C-knowledge/blob/master/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/Resource/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86.png)
+
+#### 问题
+
+HTTPS都使用了哪些加密手段？为什么？
+
+  - `非对称加密`: 连接建立过程使用, 很耗时！
+  
+  - `对称加密`: 后续通信过程使用.
