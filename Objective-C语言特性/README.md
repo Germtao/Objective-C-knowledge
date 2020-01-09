@@ -67,6 +67,15 @@
 
 ---
 
+## 三、Delegate
+
+![Delegate流程](https://raw.githubusercontent.com/Germtao/Objective-C-knowledge/master/Objective-C%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/delegate.webp)
+
+- 代理是一种设计模式，以`@protocol`形式体现，一般是**一对一传递**。
+- 一般以`weak`关键词以规避*循环引用*。
+
+--- 
+
 # KVO
 
 重写的Setter添加的方法
