@@ -127,9 +127,36 @@
 
 ---
 
-# 修饰关键字
+## 七、属性修饰关键字
 
-### copy关键字
+#### 1、读写权限
+
+- `readwrite`（默认）
+- `readonly`
+
+#### 2、原子性
+
+- `atomic`（默认）
+
+    - 读写线程安全，效率低
+    - 不是绝对安全，如修饰`Array`时，对`Array`的读写是安全的，但操作`Array`进行添加、移除其中对象就不保证安全了
+
+- `nonatomic`
+
+#### 3、引用计数
+
+- `retain`、`strong`
+- `assign` 
+
+    - 修饰基本数据类型
+    - 修饰对象时，不改变其引用计数，但会产生悬垂指针，修饰的对象在被释放后，`assign`指针仍然指向原对象内存地址，如果使用`assign`指针继续访问原对象的话，就可能会导致**内存泄漏**或**程序异常**
+    
+- `weak`：不改变被修饰对象的引用计数，所指对象在被释放后，weak指针会自动置为nil
+
+- `copy`：分为深拷贝和浅拷贝
+
+    - 浅拷贝：对内存地址的复制，让目标对象指针和原对象指向同一片内存空间会增加引用计数
+    - 深拷贝：对对象内容的复制，开辟新的内存空间
 
 源对象类型|拷贝方式|目标对象类型|拷贝类型(深/浅)
 :---:|:---:|:---:|:---:
@@ -138,15 +165,13 @@ mutable对象|mutableCopy|可变|深拷贝
 immutable对象|copy|不可变|浅拷贝
 immutable对象|mutableCopy|可变|深拷贝
 
-> 总结：
-
 - 可变对象的`copy`和`mutableCopy`都是深拷贝
 - 不可变对象的`copy`是浅拷贝，`mutableCopy`是深拷贝
 - `copy`方法返回的都是不可变对象
 
-> 问题: `@property (copy) NSMutableArray *array;`会产生什么问题？
+> 问题: `@property (nonatomic, copy) NSMutableArray *array;`会产生什么问题？
 
-- 如果赋值过来的是`NSMutableArray`或者`NSArray`，`copy`之后都是`NSArray`
+- 如果赋值过来的是`NSMutableArray`或者`NSArray`，`copy`之后都是不可变，如果对其进行可变操作如添加、移除对象，则会造成程序`crash`
 
 ---
 
