@@ -86,12 +86,22 @@
 
 ---
 
-# KVO
+# KVO（Key-value observing）
 
-重写的Setter添加的方法
+- 观察者模式的另一实现
+- 使用了`isa`混写(`isa-swizzling`)来实现KVO
 
-- `- (void)willChangeValueForKey:(NSString *)key;`
-- `- (void)didChangeValueForKey:(NSString *)key;`
+![KVO实现](https://github.com/Germtao/Objective-C-knowledge/blob/master/Objective-C%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/img/KVO.png)
+
+#### 如何触发？
+
+- 使用`setter`方法改变值，`KVO`才会生效
+- 使用`setValue:forKey:`改变值，`KVO`才会生效
+- 成员变量直接修改需手动添加`KVO`才会生效
+
+> 那么通过直接赋值成员变量会触发`KVO`吗？
+
+不会，因为不会调用`setter`方法，需要加上`willChangeValueForKey`和`didChangeValueForKey`方法来手动触发才行。
 
 ```
 // NSKVONotifying_A 的setter实现
@@ -103,13 +113,6 @@
 }
 
 ```
-
-### 如何触发？
-
-- 使用`setter`方法改变值，`KVO`才会生效
-- 使用`etValue:forKey:`改变值，`KVO`才会生效
-- 成员变量直接修改需手动添加`KVO`才会生效
-
 --- 
 
 # 修饰关键字
