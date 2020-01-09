@@ -3,10 +3,10 @@
 - [分类(Category)](https://github.com/Germtao/Objective-C-knowledge/blob/master/Objective-C%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/README.md#%E4%B8%80%E5%88%86%E7%B1%BB)
 - [扩展(Extension)](https://github.com/Germtao/Objective-C-knowledge/blob/master/Objective-C%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/README.md#%E4%BA%8C%E6%89%A9%E5%B1%95)
 - [代理(Delegate)](https://github.com/Germtao/Objective-C-knowledge/blob/master/Objective-C%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/README.md#%E4%B8%89delegate)
-- 通知(NSNotification)
-- KVO(key-value observing)
-- KVC(key-value coding)
-- 属性关键字
+- [通知(NSNotification)](https://github.com/Germtao/Objective-C-knowledge/blob/master/Objective-C%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/README.md#%E5%9B%9Bnsnotification)
+- [KVO(key-value observing)](https://github.com/Germtao/Objective-C-knowledge/blob/master/Objective-C%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/README.md#%E4%BA%94kvokey-value-observing)
+- [KVC(key-value coding)](https://github.com/Germtao/Objective-C-knowledge/blob/master/Objective-C%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/README.md#%E5%85%ADkvckey-value-coding)
+- [属性修饰关键字](https://github.com/Germtao/Objective-C-knowledge/blob/master/Objective-C%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/README.md#%E4%B8%83%E5%B1%9E%E6%80%A7%E4%BF%AE%E9%A5%B0%E5%85%B3%E9%94%AE%E5%AD%97)
 
 ---
 
