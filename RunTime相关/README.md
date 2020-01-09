@@ -216,24 +216,31 @@ NS_ASSUME_NONNULL_END
 */
 
 ```
-
 ---
 
-## 消息转发
+## 四、消息转发
 
 流程图：
 
 ![消息转发流程图](https://github.com/Germtao/Objective-C-knowledge/blob/master/RunTime%E7%9B%B8%E5%85%B3/%E6%B6%88%E6%81%AF%E8%BD%AC%E5%8F%91%E6%B5%81%E7%A8%8B.png)
 
----
-
-## Method-Swizzling
+#### 1、方法交换（Method-Swizzling）
 
 ![Method-Swizzling](https://github.com/Germtao/Objective-C-knowledge/blob/master/RunTime%E7%9B%B8%E5%85%B3/Method-Swizzling.png)
 
---- 
+```
++ (void)load {
+    Method test = class_getInstanceMethod(self, @selector(test));
 
-## 动态添加方法
+    Method otherTest = class_getInstanceMethod(self, @selector(otherTest));
+
+    method_exchangeImplementations(test, otherTest);
+}
+```
+
+> 应用场景：替换系统的方法，比如`viewDidLoad`，`viewWillAppear`以及一些响应方法，来进行统计信息。
+
+#### 2、动态添加方法
 
 > 问题: 是否用过 `performSelector:`？
 
@@ -259,31 +266,28 @@ void testIMP(void) {
 }
 ```
 
----
-
-## 动态方法解析
-
-- @dynamic
+#### 3、@dynamic 动态方法解析
 
    - 动态运行时语言将函数决议推迟到运行时
    - 编译时语言在编译期进行函数决议
- 
 
-# 最后：Runtime实战问题
+#### 4、`[obj foo]` 和 `objc_msgSend()`函数之间有什么关系？
 
-1. `[obj foo]` 和 `objc_msgSend()`函数之间有什么关系？
+- `objc_msgSend()`是`[obj foo]`的具体实现。
 
-> `[obj foo] --编译期之后--> objc_msgSend(obj, @selector(foo))`
+- `[obj foo]` --*编译期之后*--> `objc_msgSend(obj, @selector(foo))`
 
-2. `runtime` 如何通过 `Selector` 找到对应的 `IMP` 地址的？
+#### 5、`runtime` 如何通过 `Selector` 找到对应的 `IMP` 地址的？
 
-> 先在`方法缓存`中查找对应selector的IMP， 如YES返回；如NO再从当前类中查找，如YES返回；如NO再从父类逐级查找。
+- 缓存查找 --> 当前类查找 --> 父类逐级查找
 
-3. 能否向`编译后`的类中增加实例变量？
+- 先在**方法缓存**中查找对应`selector`的`IMP`， 如YES返回；如NO再从**当前类**中查找，如YES返回；如NO再从**父类**逐级查找。
 
-> 不能，编译后的类已经完成了实例变量的布局。
+#### 6、能否向`编译后`的类中增加实例变量？
 
-4. 能否向`动态添加`的类中增加实例变量？
+- 不能，编译后的类已经完成了实例变量的布局。
 
-> 能，动态添加的类只要在它的注册类对方法之前去完成实例变量的添加。
+#### 7、能否向`动态添加`的类中增加实例变量？
+
+- 能，动态添加的类只要在它的注册类对方法之前去完成实例变量的添加。
 
