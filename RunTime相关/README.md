@@ -9,6 +9,8 @@
 
 ## 一、数据结构
 
+![数据结构](https://github.com/Germtao/Objective-C-knowledge/blob/master/RunTime%E7%9B%B8%E5%85%B3/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.png)
+
 - `objc_object`：id
 
     - `isa_t`：关于`isa`操作相关
@@ -24,7 +26,7 @@
     
 - `isa`指针，共用体`isa_t`
 
-![isa指针]()
+![isa指针](https://github.com/Germtao/Objective-C-knowledge/blob/master/RunTime%E7%9B%B8%E5%85%B3/img/isa%E6%8C%87%E9%92%88.png)
 
 - `isa`指向
 
