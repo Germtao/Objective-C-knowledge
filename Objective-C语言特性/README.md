@@ -86,7 +86,7 @@
 
 ---
 
-# KVO（Key-value observing）
+## 五、KVO（Key-value observing）
 
 - 观察者模式的另一实现
 - 使用了`isa`混写(`isa-swizzling`)来实现KVO
@@ -114,6 +114,18 @@
 
 ```
 --- 
+
+## 六、KVC（Key-value coding）
+
+```
+- (id)valueForKey:(NSString *)key;
+
+- (void)setValue:(id)value forKey:(NSString *)key;
+```
+
+允许通过`Key`名直接访问对象的属性，或者给对象的属性赋值，而不需要调用明确的存取方法。这样，就可以在**运行时**动态地访问和修改对象的属性。而不是在编译时确定，这也是iOS开发中的黑魔法之一。
+
+---
 
 # 修饰关键字
 
