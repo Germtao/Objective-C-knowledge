@@ -2,7 +2,7 @@
 
 - 分类(Category)
 - 扩展(Extension)
-- 代理(Delegate)
+- [代理(Delegate)](https://github.com/Germtao/Objective-C-knowledge/blob/master/Objective-C%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/README.md#%E4%B8%89delegate)
 - 通知(NSNotification)
 - KVO(key-value observing)
 - KVC(key-value coding)
@@ -69,10 +69,10 @@
 
 ## 三、Delegate
 
-![Delegate流程](https://raw.githubusercontent.com/Germtao/Objective-C-knowledge/master/Objective-C%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/delegate.webp)
+![Delegate流程](https://github.com/Germtao/Objective-C-knowledge/blob/master/Objective-C%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/img/Delegate.png)
 
 - 代理是一种设计模式，以`@protocol`形式体现，一般是**一对一传递**。
-- 一般以`weak`关键词以规避*循环引用*。
+- 一般以`weak`关键词以规避**循环引用**。
 
 --- 
 
