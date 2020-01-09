@@ -109,19 +109,26 @@ int main(int argc, char * argv[]) {
 
 ---
 
-> **RunLoop的Mode**
+## 三、RunLoop的Mode
 
-*`RunLoop`的各个`Mode`数据不共享*
+- *`RunLoop`的各个`Mode`数据不共享*
 
 ![RunLoop的Mode](https://github.com/Germtao/Objective-C-knowledge/blob/master/RunLoop/RunLoop%20Pics/RunLoop%E7%9A%84Mode.png)
 
-> **CommonMode 的特殊性** - *Timer同时加入两个Mode中*
+- 总共是有五种`CFRunLoopMode`:
 
-NSRunLoopCommonModes
+    - `kCFRunLoopDefaultMode`
+        - 默认模式，主线程是在这个运行模式下运行
+    - `UITrackingRunLoopMode`
+        - 跟踪用户交互事件（用于`ScrollView`追踪触摸滑动，保证界面滑动时不受其他`Mode`影响）
+    - `UIInitializationRunLoopMode`
+        - 在刚启动App时第进入的第一个Mode，启动完成后就不再使用
+    - `GSEventReceiveRunLoopMode`
+        - 接受系统内部事件，通常用不到
+    - `kCFRunLoopCommonModes`
+        - 伪模式，不是一种真正的运行模式，是同步Source/Timer/Observer到多个Mode中的一种解决方案
 
-  - `CommonMode`不是实际存在的一种Mode
-  
-  - 是同步`Source/Timer/Observer`到多个Mode中的一种**技术方案**
+---
   
   
 
