@@ -160,6 +160,22 @@ int main(int argc, char * argv[]) {
     - 如果`RunLoop`被显示唤醒而且时间还没超时，重启`RunLoop`。进入步骤`2`。
 
 10. 通知观察者`RunLoop`结束。
+
+---
+
+## 五、RunLoop与NSTimer
+
+- 一个比较常见的问题：滑动`tableView`时，定时器还会生效吗？
+
+    - 默认情况下`RunLoop`运行在`kCFRunLoopDefaultMode`下，而当滑动`tableView`时，`RunLoop`切换到`UITrackingRunLoopMode`，而`Timer`是在`kCFRunLoopDefaultMode`下的，就无法接受处理`Timer`的事件。
+    
+- 怎么去解决这个问题呢？把`Timer`添加到`UITrackingRunLoopMode`上并不能解决问题，因为这样在默认情况下就无法接受定时器事件了。
+
+    - 所以需要把`Timer`同时添加到`UITrackingRunLoopMode`和`kCFRunLoopDefaultMode`上。那么如何把`timer`同时添加到多个`mode`上呢？就要用到`NSRunLoopCommonModes`了。
+    
+    `[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];`
+    
+    - `Timer`就被添加到多个`mode`上，这样即使`RunLoop`由`kCFRunLoopDefaultMode`切换到`UITrackingRunLoopMode`下，也不会影响接收`Timer`事件。
   
   
 
