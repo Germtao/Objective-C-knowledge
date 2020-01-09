@@ -76,6 +76,16 @@
 
 --- 
 
+## 四、NSNotification
+
+- 使用观察者模式来实现的用于跨层传递信息的机制。传递方式是**一对多**的。
+
+> 如果实现通知机制？
+
+![实现机制](https://github.com/Germtao/Objective-C-knowledge/blob/master/Objective-C%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/img/NSNotification.png)
+
+---
+
 # KVO
 
 重写的Setter添加的方法
