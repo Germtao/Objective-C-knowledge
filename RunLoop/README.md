@@ -1,16 +1,16 @@
 # RunLoop
 
-- [概念](https://github.com/Germtao/Objective-C-knowledge/tree/master/RunLoop/RunLoop#%E6%A6%82%E5%BF%B5)
+- 概念
 - 数据结构
 - 事件循环机制
 - RunLoop与NSTimer
 - RunLoop与多线程
 
-## 概念
+## 一、概念
 
-通过内部维护的`事件循环`来对`事件/消息进行管理`的一个对象。
+通过内部维护的**事件循环**来对**事件/消息进行管理**的一个对象。
 
-> **事件循环**是什么呢？
+#### 1、事件循环是什么呢？
 
 - 没有消息需要处理时, 休眠以避免资源占用
 
@@ -20,9 +20,36 @@
 
 ![2](https://github.com/Germtao/Objective-C-knowledge/blob/master/RunLoop/RunLoop%20Pics/%E5%86%85%E6%A0%B8%E6%80%81-%E7%94%A8%E6%88%B7%E6%80%81.png)
 
-> 总结：状态切换
+#### 2、状态切换
 
 ![3](https://github.com/Germtao/Objective-C-knowledge/blob/master/RunLoop/RunLoop%20Pics/RunLoop%E6%A6%82%E5%BF%B5%E6%80%BB%E7%BB%93.png)
+
+#### 3、为什么`main`函数不会退出？
+
+```
+int main(int argc, char * argv[]) {
+    @autoreleasepool {
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+    }
+}
+```
+
+- `UIApplicationMain`内部默认开启了主线程的`RunLoop`，并执行了一段无限循环的代码（不是简单的for循环或while循环）。
+
+```
+//无限循环代码模式(伪代码)
+int main(int argc, char * argv[]) {        
+    BOOL running = YES;
+    do {
+        // 执行各种任务，处理各种事件
+        // ......
+    } while (running);
+
+    return 0;
+}
+```
+
+- `UIApplicationMain`函数一直没有返回，而是不断地接收处理消息以及等待休眠，所以运行程序之后会保持持续运行状态。
 
 --- 
 
