@@ -130,14 +130,17 @@ struct method_t {
 
 ---
 
-## 对象、类对象、元类对象
+## 二、对象、类对象、元类对象
 
 - 类对象：存储实例方法列表等信息
+
 - 元类对象：存储类方法列表等信息
 
 之间的联系，如下图所示：
 
 ![联系](https://github.com/Germtao/Objective-C-knowledge/blob/master/RunTime%E7%9B%B8%E5%85%B3/Objcect.png)
+
+`superClass`是一层层集成的，到最后`NSObject`的`superClass`是`nil`；而`NSObject`的`isa`指向根元类，这个根元类的`isa`指向它自己，而它的`superClass`是`NSObject`，也就是最后形成一个环。
 
 --- 
 
