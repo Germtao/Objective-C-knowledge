@@ -1,5 +1,133 @@
 # Runtime相关
 
+- 数据结构
+- 对象、类对象、元类对象
+- 消息传递
+- 消息转发
+
+---
+
+## 一、数据结构
+
+- `objc_object`：id
+
+    - `isa_t`：关于`isa`操作相关
+    - 弱引用相关
+    - 关联对象相关
+    - 内存管理相关
+
+- `objc_class`：class，继承自objc_object
+
+    - Class superClass
+    - cache_t cache
+    - class_data_bits_t bits
+    
+- `isa`指针，共用体`isa_t`
+
+![isa指针]()
+
+- `isa`指向
+
+    - 关于对象，其指向类对象
+    - 关于类对象，其指向元类对象
+
+> 实例 --isa--> class --isa--> meta class  
+
+- `cache_t`
+
+    用于快速查找方法执行函数，是可增量扩展的哈希表结构，是局部性原理的最佳运用
+    
+```
+struct cache_t {
+    struct bucket_t *_buckets; // 一个散列表，用来方法缓存，bucket_t类型，包含key以及方法实现IMP
+    mask_t _mask; // 分配用来缓存bucket的总数
+    mask_t _occupied; // 表明目前实际占用的缓存bucket的个数
+｝
+struct bucket_t {
+    private:
+    cache_key_t _key;
+    IMP _imp;
+ ｝
+```
+
+- `class_data_bits_t`：对`class_rw_t`的封装
+
+```
+struct class_rw_t {
+     uint32_t flags;
+     uint32_t version;
+
+     const class_ro_t *ro;
+
+     method_array_t methods;
+     property_array_t properties;
+     protocol_array_t protocols;
+
+     Class firstSubclass;
+     Class nextSiblingClass;
+
+     char *demangledName;
+｝
+```
+
+> `class_rw_t`
+
+- 内容
+
+    - 类的属性
+    - 类的方法
+    - 类遵循的协议
+    
+- 作用
+
+    - 代表了类相关的读写信息
+    - 对`class_ro_t`的封装
+    
+        - 代表了类的只读信息
+        - 存储了编译器决定的属性、方法、遵循的协议
+        
+```
+struct class_ro_t {
+  uint32_t flags;
+  uint32_t instanceStart;
+  uint32_t instanceSize;
+  #ifdef __LP64__
+  uint32_t reserved;
+  #endif
+
+  const uint8_t * ivarLayout;
+  
+  const char * name;
+  method_list_t * baseMethodList;
+  protocol_list_t * baseProtocols;
+  const ivar_list_t * ivars;
+
+  const uint8_t * weakIvarLayout;
+  property_list_t *baseProperties;
+
+  method_list_t *baseMethods() const {
+      return baseMethodList;
+  }
+};
+```
+
+- `method_t`：函数的四要素
+
+    - 名称
+    - 返回值
+    - 参数
+    - 函数体
+    
+```
+struct method_t {
+  SEL name;           // 名称
+  const char *types;  // 返回值和参数
+  IMP imp;            // 函数体
+｝
+```
+
+---
+
 ## 对象、类对象、元类对象
 
 - 类对象：存储实例方法列表等信息
