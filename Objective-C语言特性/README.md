@@ -1,7 +1,7 @@
 # Objective-C 语言特性
 
 - [分类(Category)](https://github.com/Germtao/Objective-C-knowledge/blob/master/Objective-C%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/README.md#%E4%B8%80%E5%88%86%E7%B1%BB)
-- 扩展(Extension)
+- [扩展(Extension)](https://github.com/Germtao/Objective-C-knowledge/blob/master/Objective-C%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/README.md#%E4%BA%8C%E6%89%A9%E5%B1%95)
 - [代理(Delegate)](https://github.com/Germtao/Objective-C-knowledge/blob/master/Objective-C%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/README.md#%E4%B8%89delegate)
 - 通知(NSNotification)
 - KVO(key-value observing)
