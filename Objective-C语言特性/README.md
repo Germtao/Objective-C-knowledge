@@ -1,15 +1,55 @@
-# 关联对象
+# Objective-C 语言特性
 
-> 问题：能否给分类添加“成员变量”？ 能，通过关联对象添加。
+- 分类(Category)
+- 扩展(Extension)
+- 代理(Delegate)
+- 通知(NSNotification)
+- KVO(key-value observing)
+- KVC(key-value coding)
+- 属性关键字
 
-`id objc_getAssociatedObject(id object, const void *key)`
-`void objc_setAssociatedObject(id object, const void *key, id value, objc_AssociationPolicy policy)`
-`void objc_removAssociatedObjects(id object)`
+---
 
-### 本质
+### 一、分类
 
-关联对象由`AssociationsManager`管理并在`AssociationsHashMap`存储。
-所有对象的关联内容都在`同一个全局容器`中。
+#### 1. 分类的作用？
+
+- 声明私有方法
+- 分解体积大的类文件
+- 把`framework`的私有方法分开
+
+#### 2. 分类的特点
+
+- 运行时决议，可以为系统类添加分类
+
+在运行时，将`Category`中的`实例方法列表`、`协议列表`、`属性列表`添加到主类中后（所以Category中的方法在方法列表中的位置是在主类的同名方法之前的）；然后，会递归调用所有类的`load`方法，这一切都是在`main`函数之前执行的。
+
+#### 3. 分类可以添加哪些内容？
+
+- 实例方法
+- 类方法
+- 协议
+- 属性：添加`getter`和`setter`方法，并没有实例变量，*添加实例变量需要用关联对象*
+
+#### 4. 如果工程里有两个分类`A`和`B`，两个分类中有一个同名的方法，哪个方法最终生效？
+
+取决于分类的编译顺序，最后编译的那个分类的同名方法最终生效，而之前的都会被覆盖掉。
+
+这里并不是真正的覆盖，因为其余方法仍然存在，只是访问不到，因为在动态添加类的方法的时候是倒序遍历方法列表的，而最后编译的分类的方法会放在方法列表前面，访问的时候就会先被访问到，同理如果声明了一个和原类方法同名的方法，也会覆盖掉原类的方法。
+
+#### 5. 如果声明了两个同名的分类会怎样？
+
+会**报错**，所以第三方的分类，一般都带有命名前缀
+
+#### 6. 分类能添加成员变量吗？
+
+不能。
+
+只能通过关联对象(`objc_setAssociatedObject`)来模拟实现成员变量，但其实质是关联内容，所有对象的关联内容都放在`同一个全局容器`哈希表中:`AssociationsHashMap`，由`AssociationsManager`统一管理。
+
+- `id objc_getAssociatedObject(id object, const void *key)`
+- `void objc_setAssociatedObject(id object, const void *key, id value, objc_AssociationPolicy policy)`
+- `void objc_removAssociatedObjects(id object)`
 
 --- 
 
