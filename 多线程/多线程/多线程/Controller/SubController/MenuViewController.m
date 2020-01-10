@@ -35,10 +35,18 @@
                                          target:self
                                          action:@selector(menuItemsSelected:)];
     
+    UIButton *item2  = [UIButton buttonWithTitle:@"NSThread"
+                                             tag:2
+                                 backgroundColor:[UIColor redColor]
+                                          target:self
+                                          action:@selector(menuItemsSelected:)];
+    
     item0.frame = CGRectMake(0, 100, 180, 40);
     item1.frame = CGRectMake(0, 140, 180, 40);
+    item2.frame = CGRectMake(0, 180, 180, 40);
     [self.view addSubview:item0];
     [self.view addSubview:item1];
+    [self.view addSubview:item2];
 }
 
 - (void)menuItemsSelected:(UIButton *)sender {

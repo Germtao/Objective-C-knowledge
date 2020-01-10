@@ -10,6 +10,7 @@
 #import "SubController/MenuViewController.h"
 #import "SubController/GCDViewController.h"
 #import "SubController/OperationViewController.h"
+#import "ThreadViewController.h"
 
 @interface MasterViewController () <MenuViewControllerDelegate>
 
@@ -56,7 +57,10 @@
     OperationViewController *operationVc = [[OperationViewController alloc] init];
     UINavigationController *operationNav = [[UINavigationController alloc] initWithRootViewController:operationVc];
     
-    [self setViewControllers:@[gcdNav, operationNav]];
+    ThreadViewController *threadVc = [[ThreadViewController alloc] init];
+    UINavigationController *threadNav = [[UINavigationController alloc] initWithRootViewController:threadVc];
+    
+    [self setViewControllers:@[gcdNav, operationNav, threadNav]];
     [self setCurrentController:gcdNav];
 }
 

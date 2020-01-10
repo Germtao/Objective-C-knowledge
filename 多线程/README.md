@@ -5,6 +5,11 @@
 - 同步(Sync)和异步(Async)
 - 并发和并行
 - 队列（Dispatch Queue）
+- iOS中的多线程
+
+    - NSThread
+    - NSOperation
+    - GCD
 
 ---
 
@@ -106,14 +111,42 @@
 
 ---
 
-## 多线程比较
+## 六、iOS中的多线程
 
-### 1. NSThread
+### 1、NSThread
 
-每个NSThread对象对应一个线程，最原始的线程。
+- 轻量级别的多线程技术，每个NSThread对象对应一个线程，最原始的线程。
 
-- 优点：轻量级最低，使用更加面向对象，简单易用，可直接操作线程对象。
-- 缺点：手动管理所有的线程活动，如生命周期、线程同步、睡眠等。
+- 优点：
+
+    - 轻量级最低，使用更加面向对象，简单易用，可直接操作线程对象。
+
+- 缺点：
+
+    - 手动管理所有的线程活动，如生命周期、线程同步、睡眠等。
+    
+```
+NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(testThread:) object:@"我是参数"];
+// 当使用初始化方法出来的主线程需要start启动
+[thread start];
+// 可以为开辟的子线程起名字
+thread.name = @"NSThread-1";
+// 线程的优先级，由0.0到1.0之间的浮点数指定，其中1.0是最高优先级。
+// 优先级越高，先执行的概率就会越高，但由于优先级是由内核确定的，因此不能保证此值实际上是多少，默认值是0.5
+thread.threadPriority = 1;
+// 取消当前已经启动的线程
+[thread cancel];
+```
+
+```
+// 通过遍历构造器开辟子线程
+[NSThread detachNewThreadSelector:@selector(testThread:) toTarget:self withObject:@"构造器开辟子线程"];
+```
+```
+- (void)testThread:(id)obj {
+    NSLog(@"%@", obj);
+}
+```
 
 ### 2. NSOperation
 

@@ -19,6 +19,7 @@
 		3B1BB5D522B0D9650081FB2E /* OperationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BB5D422B0D9650081FB2E /* OperationViewController.m */; };
 		3B1BB5D922B22B4D0081FB2E /* UserCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BB5D822B22B4C0081FB2E /* UserCenter.m */; };
 		3B1BB5DE22B2307C0081FB2E /* GroupObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1BB5DD22B2307C0081FB2E /* GroupObject.m */; };
+		3BA82FE323C81F3C006C12E3 /* ThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA82FE223C81F3C006C12E3 /* ThreadViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,8 @@
 		3B1BB5D822B22B4C0081FB2E /* UserCenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserCenter.m; sourceTree = "<group>"; };
 		3B1BB5DC22B2307C0081FB2E /* GroupObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupObject.h; sourceTree = "<group>"; };
 		3B1BB5DD22B2307C0081FB2E /* GroupObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupObject.m; sourceTree = "<group>"; };
+		3BA82FE123C81F3C006C12E3 /* ThreadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThreadViewController.h; sourceTree = "<group>"; };
+		3BA82FE223C81F3C006C12E3 /* ThreadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThreadViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +122,8 @@
 				3B1BB5D122B0D9560081FB2E /* GCDViewController.m */,
 				3B1BB5D322B0D9650081FB2E /* OperationViewController.h */,
 				3B1BB5D422B0D9650081FB2E /* OperationViewController.m */,
+				3BA82FE123C81F3C006C12E3 /* ThreadViewController.h */,
+				3BA82FE223C81F3C006C12E3 /* ThreadViewController.m */,
 			);
 			path = SubController;
 			sourceTree = "<group>";
@@ -221,6 +226,7 @@
 			files = (
 				3B1BB5D522B0D9650081FB2E /* OperationViewController.m in Sources */,
 				3B1BB5CE22B0D3A70081FB2E /* UIButton+Extension.m in Sources */,
+				3BA82FE323C81F3C006C12E3 /* ThreadViewController.m in Sources */,
 				3B1BB5D222B0D9560081FB2E /* GCDViewController.m in Sources */,
 				3B1BB5B622B0CDF90081FB2E /* MasterViewController.m in Sources */,
 				3B1BB5DE22B2307C0081FB2E /* GroupObject.m in Sources */,
