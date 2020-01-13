@@ -190,9 +190,9 @@ thread.threadPriority = 1;
 > 打印结果：
 
 ```
-2020-01-10 15:25:54.581264+0800 多线程[27385:5931439] 任务1
-2020-01-10 15:25:56.581754+0800 多线程[27385:5931439] 任务1 ----- <NSThread: 0x600003172100>{number = 1, name = main}
-2020-01-10 15:25:58.582752+0800 多线程[27385:5931439] 任务1 ----- <NSThread: 0x600003172100>{number = 1, name = main}
+任务1
+任务1 ----- <NSThread: 0x600003172100>{number = 1, name = main}
+任务1 ----- <NSThread: 0x600003172100>{number = 1, name = main}
 ```
 
 ```
@@ -212,9 +212,9 @@ thread.threadPriority = 1;
 > 打印结果：
 
 ```
-2020-01-10 15:27:23.347318+0800 多线程[27409:5932600] 任务1
-2020-01-10 15:27:25.347816+0800 多线程[27409:5932600] 任务1 ----- <NSThread: 0x600001c024c0>{number = 7, name = (null)}
-2020-01-10 15:27:27.349225+0800 多线程[27409:5932600] 任务1 ----- <NSThread: 0x600001c024c0>{number = 7, name = (null)}
+任务1
+任务1 ----- <NSThread: 0x600001c024c0>{number = 7, name = (null)}
+任务1 ----- <NSThread: 0x600001c024c0>{number = 7, name = (null)}
 ```
 
 **综上所述**：在没有使用`NSOperationQueue`的情况下，使用子类`NSInvocationOperation`执行一个操作。
@@ -240,9 +240,9 @@ thread.threadPriority = 1;
 > 打印结果：
 
 ```
-2020-01-10 15:37:17.718294+0800 多线程[27558:5938313] 任务2
-2020-01-10 15:37:19.719564+0800 多线程[27558:5938313] 任务2 ----- <NSThread: 0x600003bef9c0>{number = 1, name = main}
-2020-01-10 15:37:21.720853+0800 多线程[27558:5938313] 任务2 ----- <NSThread: 0x600003bef9c0>{number = 1, name = main}
+任务2
+任务2 ----- <NSThread: 0x600003bef9c0>{number = 1, name = main}
+任务2 ----- <NSThread: 0x600003bef9c0>{number = 1, name = main}
 ```
 
 **添加一些额外操作后看看**：
@@ -262,15 +262,15 @@ for (int i = 0; i < 3; i++) {
 > 打印结果：
 
 ```
-2020-01-10 15:45:48.660238+0800 多线程[27706:5943843] 任务2
-2020-01-10 15:45:50.661238+0800 多线程[27706:5943931] 任务2 ----- <NSThread: 0x60000027a740>{number = 6, name = (null)}
-2020-01-10 15:45:50.661238+0800 多线程[27706:5943935] 任务2 ----- <NSThread: 0x600000227040>{number = 3, name = (null)}
-2020-01-10 15:45:50.661253+0800 多线程[27706:5943843] 任务2 ----- <NSThread: 0x60000022ee00>{number = 1, name = main}
-2020-01-10 15:45:50.661238+0800 多线程[27706:5943933] 任务2 ----- <NSThread: 0x60000027d6c0>{number = 5, name = (null)}
-2020-01-10 15:45:52.662560+0800 多线程[27706:5943935] 任务2 ----- <NSThread: 0x600000227040>{number = 3, name = (null)}
-2020-01-10 15:45:52.662566+0800 多线程[27706:5943931] 任务2 ----- <NSThread: 0x60000027a740>{number = 6, name = (null)}
-2020-01-10 15:45:52.662561+0800 多线程[27706:5943933] 任务2 ----- <NSThread: 0x60000027d6c0>{number = 5, name = (null)}
-2020-01-10 15:45:52.662561+0800 多线程[27706:5943843] 任务2 ----- <NSThread: 0x60000022ee00>{number = 1, name = main}
+任务2
+任务2 ----- <NSThread: 0x60000027a740>{number = 6, name = (null)}
+任务2 ----- <NSThread: 0x600000227040>{number = 3, name = (null)}
+任务2 ----- <NSThread: 0x60000022ee00>{number = 1, name = main}
+任务2 ----- <NSThread: 0x60000027d6c0>{number = 5, name = (null)}
+任务2 ----- <NSThread: 0x600000227040>{number = 3, name = (null)}
+任务2 ----- <NSThread: 0x60000027a740>{number = 6, name = (null)}
+任务2 ----- <NSThread: 0x60000027d6c0>{number = 5, name = (null)}
+任务2 ----- <NSThread: 0x60000022ee00>{number = 1, name = main}
 ```
 
 **综上所述**：
@@ -307,9 +307,9 @@ for (int i = 0; i < 3; i++) {
 > 打印结果：
 
 ```
-2020-01-10 15:56:12.788357+0800 多线程[27862:5949986] 任务3
-2020-01-10 15:56:14.789676+0800 多线程[27862:5949986] 任务3 ----- <NSThread: 0x600002c0ad40>{number = 1, name = main}
-2020-01-10 15:56:16.790990+0800 多线程[27862:5949986] 任务3 ----- <NSThread: 0x600002c0ad40>{number = 1, name = main}
+任务3
+任务3 ----- <NSThread: 0x600002c0ad40>{number = 1, name = main}
+任务3 ----- <NSThread: 0x600002c0ad40>{number = 1, name = main}
 ```
 
 - 操作是在当前线程执行的，并没有开启新线程。
@@ -392,16 +392,16 @@ NSOperationQueue *queue = [[NSOperationQueue alloc] init];
 > 打印结果：
 
 ```
-2020-01-10 16:14:39.256158+0800 多线程[28193:5962558] blockTask1 ----- <NSThread: 0x600003e90080>{number = 7, name = (null)}
-2020-01-10 16:14:39.256165+0800 多线程[28193:5962554] invocationOpTask2 ----- <NSThread: 0x600003e6c580>{number = 8, name = (null)}
-2020-01-10 16:14:39.256271+0800 多线程[28193:5962559] blockTask3 ----- <NSThread: 0x600003e03840>{number = 9, name = (null)}
-2020-01-10 16:14:39.256277+0800 多线程[28193:5962560] blockTask2 ----- <NSThread: 0x600003e900c0>{number = 10, name = (null)}
-2020-01-10 16:14:39.256280+0800 多线程[28193:5962499] invocationOpTask1 ----- <NSThread: 0x600003e41040>{number = 5, name = (null)}
-2020-01-10 16:14:41.261604+0800 多线程[28193:5962560] blockTask2 ----- <NSThread: 0x600003e900c0>{number = 10, name = (null)}
-2020-01-10 16:14:41.261600+0800 多线程[28193:5962554] invocationOpTask2 ----- <NSThread: 0x600003e6c580>{number = 8, name = (null)}
-2020-01-10 16:14:41.261600+0800 多线程[28193:5962558] blockTask1 ----- <NSThread: 0x600003e90080>{number = 7, name = (null)}
-2020-01-10 16:14:41.261610+0800 多线程[28193:5962499] invocationOpTask1 ----- <NSThread: 0x600003e41040>{number = 5, name = (null)}
-2020-01-10 16:14:41.261600+0800 多线程[28193:5962559] blockTask3 ----- <NSThread: 0x600003e03840>{number = 9, name = (null)}
+blockTask1 ----- <NSThread: 0x600003e90080>{number = 7, name = (null)}
+invocationOpTask2 ----- <NSThread: 0x600003e6c580>{number = 8, name = (null)}
+blockTask3 ----- <NSThread: 0x600003e03840>{number = 9, name = (null)}
+blockTask2 ----- <NSThread: 0x600003e900c0>{number = 10, name = (null)}
+invocationOpTask1 ----- <NSThread: 0x600003e41040>{number = 5, name = (null)}
+blockTask2 ----- <NSThread: 0x600003e900c0>{number = 10, name = (null)}
+invocationOpTask2 ----- <NSThread: 0x600003e6c580>{number = 8, name = (null)}
+blockTask1 ----- <NSThread: 0x600003e90080>{number = 7, name = (null)}
+invocationOpTask1 ----- <NSThread: 0x600003e41040>{number = 5, name = (null)}
+blockTask3 ----- <NSThread: 0x600003e03840>{number = 9, name = (null)}
 ```
 
 **综上所述**：使用`addOperation:`将操作加入到操作队列后能够**开启新线程**，并**并行**执行。
@@ -435,12 +435,12 @@ NSOperationQueue *queue = [[NSOperationQueue alloc] init];
 > 打印结果：
 
 ```
-2020-01-10 16:41:56.401134+0800 多线程[28408:5973878] 2 ----- <NSThread: 0x600003b8ef40>{number = 6, name = (null)}
-2020-01-10 16:41:56.401137+0800 多线程[28408:5973879] 1 ----- <NSThread: 0x600003b83ec0>{number = 4, name = (null)}
-2020-01-10 16:41:56.401134+0800 多线程[28408:5973882] 3 ----- <NSThread: 0x600003b83f00>{number = 3, name = (null)}
-2020-01-10 16:41:58.406510+0800 多线程[28408:5973879] 1 ----- <NSThread: 0x600003b83ec0>{number = 4, name = (null)}
-2020-01-10 16:41:58.406509+0800 多线程[28408:5973878] 2 ----- <NSThread: 0x600003b8ef40>{number = 6, name = (null)}
-2020-01-10 16:41:58.406512+0800 多线程[28408:5973882] 3 ----- <NSThread: 0x600003b83f00>{number = 3, name = (null)}
+2 ----- <NSThread: 0x600003b8ef40>{number = 6, name = (null)}
+1 ----- <NSThread: 0x600003b83ec0>{number = 4, name = (null)}
+3 ----- <NSThread: 0x600003b83f00>{number = 3, name = (null)}
+1 ----- <NSThread: 0x600003b83ec0>{number = 4, name = (null)}
+2 ----- <NSThread: 0x600003b8ef40>{number = 6, name = (null)}
+3 ----- <NSThread: 0x600003b83f00>{number = 3, name = (null)}
 ```
 
 **综上所述**：使用`addOperationWithBlock:`将操作加入到操作队列后能够**开启新线程**，并**并行**执行。
@@ -482,14 +482,14 @@ NSOperationQueue *queue = [[NSOperationQueue alloc] init];
 > 打印结果：
 
 ```
-2020-01-10 16:56:47.519974+0800 多线程[28689:5984540] 1 ----- <NSThread: 0x60000149c180>{number = 3, name = (null)}
-2020-01-10 16:56:49.523232+0800 多线程[28689:5984540] 1 ----- <NSThread: 0x60000149c180>{number = 3, name = (null)}
-2020-01-10 16:56:51.528742+0800 多线程[28689:5984540] 2 ----- <NSThread: 0x60000149c180>{number = 3, name = (null)}
-2020-01-10 16:56:53.533423+0800 多线程[28689:5984540] 2 ----- <NSThread: 0x60000149c180>{number = 3, name = (null)}
-2020-01-10 16:56:55.536091+0800 多线程[28689:5984540] 3 ----- <NSThread: 0x60000149c180>{number = 3, name = (null)}
-2020-01-10 16:56:57.541492+0800 多线程[28689:5984540] 3 ----- <NSThread: 0x60000149c180>{number = 3, name = (null)}
-2020-01-10 16:56:59.543677+0800 多线程[28689:5984535] 4 ----- <NSThread: 0x6000014b0c40>{number = 5, name = (null)}
-2020-01-10 16:57:01.545282+0800 多线程[28689:5984535] 4 ----- <NSThread: 0x6000014b0c40>{number = 5, name = (null)}
+1 ----- <NSThread: 0x60000149c180>{number = 3, name = (null)}
+1 ----- <NSThread: 0x60000149c180>{number = 3, name = (null)}
+2 ----- <NSThread: 0x60000149c180>{number = 3, name = (null)}
+2 ----- <NSThread: 0x60000149c180>{number = 3, name = (null)}
+3 ----- <NSThread: 0x60000149c180>{number = 3, name = (null)}
+3 ----- <NSThread: 0x60000149c180>{number = 3, name = (null)}
+4 ----- <NSThread: 0x6000014b0c40>{number = 5, name = (null)}
+4 ----- <NSThread: 0x6000014b0c40>{number = 5, name = (null)}
 ```
 
 **2、maxConcurrentOperationCount = 3**
@@ -497,14 +497,14 @@ NSOperationQueue *queue = [[NSOperationQueue alloc] init];
 > 打印结果：
 
 ```
-2020-01-10 17:00:23.880552+0800 多线程[28731:5986297] 1 ----- <NSThread: 0x600001ed0340>{number = 5, name = (null)}
-2020-01-10 17:00:23.880553+0800 多线程[28731:5986300] 2 ----- <NSThread: 0x600001ef6800>{number = 3, name = (null)}
-2020-01-10 17:00:23.880552+0800 多线程[28731:5986295] 3 ----- <NSThread: 0x600001edb680>{number = 6, name = (null)}
-2020-01-10 17:00:25.885401+0800 多线程[28731:5986295] 3 ----- <NSThread: 0x600001edb680>{number = 6, name = (null)}
-2020-01-10 17:00:25.885401+0800 多线程[28731:5986300] 2 ----- <NSThread: 0x600001ef6800>{number = 3, name = (null)}
-2020-01-10 17:00:25.885401+0800 多线程[28731:5986297] 1 ----- <NSThread: 0x600001ed0340>{number = 5, name = (null)}
-2020-01-10 17:00:27.885770+0800 多线程[28731:5986299] 4 ----- <NSThread: 0x600001e2d100>{number = 7, name = (null)}
-2020-01-10 17:00:29.888657+0800 多线程[28731:5986299] 4 ----- <NSThread: 0x600001e2d100>{number = 7, name = (null)}
+1 ----- <NSThread: 0x600001ed0340>{number = 5, name = (null)}
+2 ----- <NSThread: 0x600001ef6800>{number = 3, name = (null)}
+3 ----- <NSThread: 0x600001edb680>{number = 6, name = (null)}
+3 ----- <NSThread: 0x600001edb680>{number = 6, name = (null)}
+2 ----- <NSThread: 0x600001ef6800>{number = 3, name = (null)}
+1 ----- <NSThread: 0x600001ed0340>{number = 5, name = (null)}
+4 ----- <NSThread: 0x600001e2d100>{number = 7, name = (null)}
+4 ----- <NSThread: 0x600001e2d100>{number = 7, name = (null)}
 ```
 
 **综上所述**：开启线程数量是由系统决定的。
@@ -546,22 +546,286 @@ NSOperationQueue *queue = [[NSOperationQueue alloc] init];
 > 打印结果：
 
 ```
-2020-01-10 17:13:13.588357+0800 多线程[29325:5998600] blockOp1 ----- <NSThread: 0x6000025c0180>{number = 7, name = (null)}
-2020-01-10 17:13:15.589582+0800 多线程[29325:5998600] blockOp1 ----- <NSThread: 0x6000025c0180>{number = 7, name = (null)}
-2020-01-10 17:13:17.594448+0800 多线程[29325:5998680] blockOp2 ----- <NSThread: 0x6000025c43c0>{number = 8, name = (null)}
-2020-01-10 17:13:19.600297+0800 多线程[29325:5998680] blockOp2 ----- <NSThread: 0x6000025c43c0>{number = 8, name = (null)}
+blockOp1 ----- <NSThread: 0x6000025c0180>{number = 7, name = (null)}
+blockOp1 ----- <NSThread: 0x6000025c0180>{number = 7, name = (null)}
+blockOp2 ----- <NSThread: 0x6000025c43c0>{number = 8, name = (null)}
+blockOp2 ----- <NSThread: 0x6000025c43c0>{number = 8, name = (null)}
 ```
 
 ---
 
-### 3. GCD
+### 3、 GCD
 
-Grand Central Dispatch (GCD)是Apple开发的一个多核编程的解决方法。
+#### 3.1、GCD简介
 
-- 优点：最高效，避开并发陷阱。充分利用设备的多核（自动），旨在替代NSThread等线程技术。
-- 缺点：基于C实现。
+`Grand Central Dispatch (GCD)`是Apple开发的一个多核编程的解决方法。
 
-### 4. 方案选择
+`GCD`以`block`为基本单位，一个`block`中的代码可以为一个任务。下文中提到任务，可以理解为执行某个`block`。
+
+同时，`GCD`中有两大最重要的概念：
+
+- **队列**
+
+    - **串行队列**：先进先出，也就是先进入队列的任务先出队列，每次只执行一个任务。
+    - **并行队列**：先进先出，但可以形成多个任务并发。
+    - **主队列**：一个特殊的串行队列，而且队列中的任务一定会在主线程中执行。
+
+- **执行方式**
+
+    - 同步执行
+    - 异步执行
+
+使用`block`的过程，概括来说就是把`block`放进合适的队列，并选择合适的执行方式去执行`block`的过程。
+
+关于**同步/异步**、**并行/串行**和**线程**的关系，可以由下表概括：
+
+||同步|异步|
+|:---:|:---:|:---:|
+|主队列|在主线程中执行|在主线程中执行|
+|串行队列|在当前线程中执行|新建线程执行|
+|并行队列|在当前线程中执行|新建线程执行|
+
+可以看到，同步方法不一定在本线程，异步方法方法也不一定新开线程（考虑主队列）。
+
+- **优点**：
+    
+    - 最高效，避开并发陷阱。充分利用设备的多核（自动），旨在替代NSThread等线程技术。
+    
+- **缺点**：
+
+    - 基于C实现。
+    
+#### 3.2、GCD死锁
+
+向当前**串行队列**中**同步**派发一个任务，就会导致**死锁**（就是队列引起的循环等待）。
+
+举个🌰：主队列同步
+
+```
+dispatch_sync(dispatch_get_main_queue(), ^{
+    // doSomething...
+});
+```
+
+1. 主队列在执行 `dispatch_sync`，随后队列中新增一个任务 `block`。
+2. 因为主队列是同步队列，所以`block` 要等 `dispatch_sync` 执行完才能执行，但是 `dispatch_sync` 是同步派发，要等 `block` 执行完才算是结束。
+3. 在主队列中的两个任务互相等待，导致了死锁。
+
+#### 3.3、GCD任务执行顺序
+
+- **串行队列：先异步，后同步**
+
+```
+dispatch_queue_t serialQueue = dispatch_queue_create("serialQueue1", DISPATCH_QUEUE_SERIAL);
+NSLog(@"1");
+
+dispatch_async(serialQueue, ^{
+    NSLog(@"2");
+});
+
+NSLog(@"3");
+
+dispatch_sync(serialQueue, ^{
+    NSLog(@"4");
+});
+
+NSLog(@"5");
+```
+
+> 打印结果：13245
+
+- **performSelector**
+
+```
+dispatch_async(dispatch_get_global_queue(0, 0), ^{
+    NSLog(@"1");
+    // performSelctor 方法需要runloop, 如果没有, 方法失效（GCD底层创建的线程是默认没有开启对应runloop的）
+    [self performSelector:@selector(printLog) withObject:nil afterDelay:0];
+    NSLog(@"3");
+});
+```
+
+> 打印结果： 13
+
+#### 3.4、GCD常用函数
+
+- **栅栏函数（dispatch_barrier_async）**
+- **dispatch_group**
+- **信号量（dispatch_semaphore）**
+- **延时函数（dispatch_after）**
+- **使用dispatch_once实现单例**
+
+**3.4.1、栅栏函数（dispatch_barrier_async）**
+
+- 如何实现**多读单写**？
+
+```
+dispatch_queue_t concurrentQueue = dispatch_queue_create("concurrentQueue1", DISPATCH_QUEUE_CONCURRENT);
+
+for (int i = 0; i < 3; i++) {
+    dispatch_async(concurrentQueue, ^{
+        // 读操作
+        NSLog(@"任务 - %d", i);
+    });
+}
+
+dispatch_barrier_async(concurrentQueue, ^{
+    // 写操作
+    NSLog(@"dispatch_barrier_async");
+});
+
+for (int i = 5; i < 8; i++) {
+    dispatch_async(concurrentQueue, ^{
+        NSLog(@"任务 - %d", i);
+    });
+}
+```
+
+> 打印结果：`任务 0-2`必然会在 `任务5-7`之前执行。
+
+**3.4.2、dispatch_group**
+
+- `dispatch_group_async`
+- `dispatch_group_enter` & `dispatch_group_leave`
+    
+> 在`n`个耗时并发任务都完成后，再去执行接下来的任务。比如，在`n`个网络请求完成后去刷新UI页面。
+
+1. **dispatch_group_async**
+
+```
+dispatch_group_t group = dispatch_group_create();
+dispatch_queue_t queue = dispatch_queue_create("queue1", DISPATCH_QUEUE_CONCURRENT);
+
+for (NSInteger i = 0; i < 10; i++) {
+    dispatch_group_async(group, queue, ^{
+        NSLog(@"网络请求 - %ld - %@", i, [NSThread currentThread]);
+    });
+}
+
+// group中的所有任务已经全部完成, 回到主线程刷新UI
+dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+    NSLog(@"刷新UI - %@", [NSThread currentThread]);
+});
+```
+2. **dispatch_group_enter** 与 **dispatch_group_leave**
+
+```
+dispatch_group_t group = dispatch_group_create();
+dispatch_queue_t queue = dispatch_queue_create("queue1", DISPATCH_QUEUE_CONCURRENT);
+
+for (NSInteger i = 0; i < 10; i++) {
+    dispatch_group_enter(group);
+    dispatch_async(queue, ^{
+        NSLog(@"网络请求 - %ld - %@", i, [NSThread currentThread]);
+        dispatch_group_leave(group);
+    });
+}
+
+// group中的所有任务已经全部完成, 回到主线程刷新UI
+dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+    NSLog(@"刷新UI - %@", [NSThread currentThread]);
+});
+```
+
+> 打印结果：
+
+```
+网络请求 - 2 - <NSThread: 0x6000010335c0>{number = 6, name = (null)}
+网络请求 - 0 - <NSThread: 0x600001006d80>{number = 7, name = (null)}
+网络请求 - 1 - <NSThread: 0x600001037f40>{number = 5, name = (null)}
+网络请求 - 3 - <NSThread: 0x600001033380>{number = 3, name = (null)}
+网络请求 - 5 - <NSThread: 0x600001036a40>{number = 4, name = (null)}
+网络请求 - 4 - <NSThread: 0x60000101db80>{number = 8, name = (null)}
+网络请求 - 6 - <NSThread: 0x6000010e0040>{number = 9, name = (null)}
+网络请求 - 7 - <NSThread: 0x6000010e4080>{number = 10, name = (null)}
+网络请求 - 8 - <NSThread: 0x60000101df00>{number = 11, name = (null)}
+网络请求 - 9 - <NSThread: 0x60000101db00>{number = 12, name = (null)}
+刷新UI - <NSThread: 0x60000106e0c0>{number = 1, name = main}
+```
+
+3. **dispatch_group_wait**：`dispatch_group_wait(group: dispatch_group_t, _ timeout: dispatch_time_t) -> Int`
+
+    - `group:`：表示要等待的group。
+    - `timeout:`：表示等待时间。两个特殊值：`DISPATCH_TIME_NOW`、`DISPATCH_TIME_FOREVER`。
+    - 返回值：表示经过指定的等待时间，属于这个`group`的任务是否已经全部执行完，完成则返回0，未完成则返回非0。
+
+**3.4.3、信号量（dispatch_semaphore）**
+
+`GCD`中的信号量是指`Dispatch Semaphore`，是持有计数的信号。
+
+- 信号量有以下三个函数：
+
+    - `dispatch_semaphore_create`：创建一个信号量。
+    - `dispatch_semaphore_signal`：信号量+1。
+    - `dispatch_semaphore_wait`：等待，直到信号量大于0时，即可操作，同时将信号量-1。
+
+- 信号量在实际开发中主要用于：
+
+    - 保持线程同步，将异步执行任务转换为同步执行任务。
+    - 保证线程安全，为线程加锁。
+    
+**1、保持线程同步**
+
+```
+dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+
+__block NSInteger number = 0;
+dispatch_async(queue, ^{
+    number = 100;
+    dispatch_semaphore_signal(semaphore);
+});
+
+dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+
+NSLog(@"semaphore---end, number = %ld", number);
+```
+
+**2、保持线程安全，为线程加锁**
+
+```
+dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);
+dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+
+__block NSInteger number = 0;
+for (NSInteger i = 0; i < 50; i++) {
+    dispatch_async(queue, ^{
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        number++;
+        sleep(1);
+        NSLog(@"执行任务：%ld", number);
+        dispatch_semaphore_signal(semaphore);
+    });
+}
+```
+
+**3.4.4、延时函数（dispatch_after）**
+
+```
+// 第一个参数是time，第二个参数是dispatch_queue，第三个参数是要执行的block
+dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    NSLog(@"dispatch_after");
+});
+```
+由于其内部使用的是`dispatch_time_t`管理时间，而不是`NSTimer`。
+所以如果在子线程中调用，相比`performSelector:afterDelay`，不用关心runloop是否开启。
+
+**3.4.5、使用dispatch_once实现单例**
+
+```
++ (instancetype)shareInstance {
+    static dispatch_once_t onceToken;
+    static id instance = nil;
+    dispatch_once(&onceToken, ^{
+        instance = [[self alloc] init];
+    });
+    return instance;
+}
+```
+
+---
+
+### 4、方案选择
 
 - 简单而安全的选择`NSOperation`实现多线程即可。
 - 处理大量并发数据，又追求性能效率的选择`GCD`。
