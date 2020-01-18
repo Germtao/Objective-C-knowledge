@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MyBlock : NSObject
 
 - (void)method;
+- (void)changeMethod;
 
 @end
 

@@ -19,7 +19,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     MyBlock *block = [[MyBlock alloc] init];
-    [block method];
+//    [block method];
+    [block changeMethod];
     
     return YES;
 }
